@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/06/15 17:55:03 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/06/15 18:55:27 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@ NAME = wolf3d
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -flto
 
-INCLUDE = -I$(HEADERS_DIR) -I$(LIBFT_HEADERS) -I$(SDL_HEADERS) -D_THREAD_SAFE
+INCLUDE = -I$(HEADERS_DIR) -I$(LIBFT_HEADERS) -I$(SDL_HEADERS)
 
 LIBFT_DIR = ./libft/
-LIBFT_HEADERS = $(LIBFT_DIR)include/
+LIBFT_HEADERS = $(LIBFT_DIR)include/SDL2 -D_THREAD_SAFE
 LIBFT = $(LIBFT_DIR)libft.a
 
 SDL_DIR = ./sdl/
 SDL_HEADERS = $(SDL_DIR)include/
-SDL = $(SDL_DIR)lib
+SDL = $(SDL_DIR)build/build/.libs/
 
 LIBS = -L$(LIBFT_DIR) -lft  -L$(SDL) -lSDL2
 
