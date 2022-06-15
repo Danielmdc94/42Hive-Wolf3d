@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/06/15 20:11:35 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/06/15 22:45:10 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
+$(NAME): $(LIBFT) sdl $(OBJ_DIR) $(OBJ)
 	@$(CC) $(FLAGS) $(LIBS) $(INCLUDE) $(OBJ) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) binary was created$(RESET)"
@@ -68,11 +68,16 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 $(LIBFT):
 	@echo "$(NAME): $(GREEN)Compiling $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIR)
+	@echo "$(MY_PATH)"
 
 sdl:
 	@echo "$(NAME): $(GREEN)Compiling $(SDL)...$(RESET)"
 	@mkdir $(SDL_DIR)build/
-	@cd $(SDL_DIR)build/; ./sdl/configure --prefix /Users/dpalacio/Documents/workspace/wolf3d/sdl/build
+	@cd $(SDL_DIR)build/; ../configure --prefix $(MYPATH)/sdl/build
+	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
+	sed -i .bak "7s,.*,prefix = $(MYPATH)/sdl/build," ./sdl/build/Makefile
+	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
+	@$(MAKE) -sC $(SDL_DIR)build/ install
 	@echo "$(MY_PATH)"
 
 clean:
@@ -86,6 +91,6 @@ fclean: clean
 	@echo "$(NAME): $(YELLOW)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)
 	@echo "$(NAME): $(YELLOW)$(NAME) was deleted$(RESET)"
-#	@rm -fr $(SDL_DIR)build/
+	@rm -fr $(SDL_DIR)build/
 
 re: fclean all
