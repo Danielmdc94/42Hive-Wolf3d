@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/06/16 15:51:47 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/06/16 18:37:36 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,13 @@ GREEN = \033[0;32m
 YELLOW = \033[0;33m
 RESET = \033[0m
 
+SDL_EXISTS=$(shell [ -e  ] && echo 1 || echo 0 )
+
 .PHONY: all clean fclean re sdl
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) sdl $(OBJ_DIR) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
 	@$(CC) $(FLAGS) $(LIBS) $(INCLUDE) $(OBJ) -o $(NAME)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) binary was created$(RESET)"
@@ -68,23 +70,32 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 $(LIBFT):
 	@echo "$(NAME): $(GREEN)Compiling $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIR)
-	@echo "$(MY_PATH)"
 
-sdl:
-	@echo "$(NAME): $(GREEN)Compiling $(SDL)...$(RESET)"
-	@mkdir $(SDL_DIR)build/
-	@cd $(SDL_DIR)build/; ../configure --prefix $(MYPATH)/sdl/build
-	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
-	@bash sdl_path.sh
-	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
-	@$(MAKE) -sC $(SDL_DIR)build/ install
-	@echo "$(MY_PATH)"
+sdl_install:
+
+	@echo "$(NAME): $(GREEN)Compiling SDL2...$(RESET)"
+	@if [ -d "$(SDL_DIR)build/" ];\
+	then\
+		echo "$(NAME): $(YELLOW)SDL2 already exists.$(RESET)";\
+	else\
+		mkdir -p $(SDL_DIR)build/;\
+		cd $(SDL_DIR)build/; ../configure --prefix $(MYPATH)/sdl/build;\
+		cd $(MY_PATH);\
+		bash sdl_path.sh;\
+		$(MAKE) -sC $(SDL_DIR)build;/\
+		$(MAKE) -sC $(SDL_DIR)build/ install;\
+		echo "$(NAME): $(GREEN)SDL2  was installed.$(RESET)";\
+	fi;
+
+sdl_uninstall:
+	@rm -fr $(SDL_DIR)build/
+	@echo "$(NAME): $(YELLOW)SDL2 was uninstalled.$(RESET)"
 
 clean:
 	@$(MAKE) -sC $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
-	@echo "$(NAME): $(YELLOW)$(OBJ_DIR) was deleted$(RESET)"
-	@echo "$(NAME): $(YELLOW)object files were deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)Removed objects directory$(RESET)"
+	@echo "$(NAME): $(YELLOW)Removed object files$(RESET)"
 
 fclean: clean
 	@rm -f $(LIBFT)
