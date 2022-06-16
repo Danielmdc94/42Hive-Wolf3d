@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/06/15 22:45:10 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/06/16 15:51:47 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ sdl:
 	@mkdir $(SDL_DIR)build/
 	@cd $(SDL_DIR)build/; ../configure --prefix $(MYPATH)/sdl/build
 	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
-	sed -i .bak "7s,.*,prefix = $(MYPATH)/sdl/build," ./sdl/build/Makefile
+	@bash sdl_path.sh
 	@echo "$(NAME): $(GREEN)----HERE----$(RESET)"
 	@$(MAKE) -sC $(SDL_DIR)build/ install
 	@echo "$(MY_PATH)"
