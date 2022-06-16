@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/15 18:08:25 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/16 20:59:06 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 
 	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) != 0)
 		return (1);
-	win = SDL_CreateWindow("Wolf3d", 0, 0, 640, 480, 0);
+	win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!win)
 	{
 		SDL_Quit();

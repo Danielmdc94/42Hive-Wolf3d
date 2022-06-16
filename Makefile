@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/06/16 18:37:36 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/06/16 21:15:09 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,37 +52,36 @@ SDL_EXISTS=$(shell [ -e  ] && echo 1 || echo 0 )
 
 .PHONY: all clean fclean re sdl
 
-all: $(NAME)
+all: $(LIBFT) sdl_install $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(FLAGS) $(LIBS) $(INCLUDE) $(OBJ) -o $(NAME)
-	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
-	@echo "$(NAME): $(GREEN)$(NAME) binary was created$(RESET)"
+	@echo "\n$(NAME): $(GREEN)Created object files.$(RESET)"
+	@echo "$(NAME): $(GREEN)Created Wolf3d executable.$(RESET)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@echo "$(NAME): $(GREEN)$(OBJ_DIR) was created$(RESET)"
+	@echo "$(NAME): $(GREEN)Created obj/ directory.$(RESET)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	@$(CC) $(FLAGS) -c $(INCLUDE) $< -o $@
 	@echo "$(GREEN).$(RESET)\c"
 
 $(LIBFT):
-	@echo "$(NAME): $(GREEN)Compiling $(LIBFT)...$(RESET)"
+	@echo "$(NAME): $(GREEN)Compiling Libft...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIR)
 
 sdl_install:
-
-	@echo "$(NAME): $(GREEN)Compiling SDL2...$(RESET)"
 	@if [ -d "$(SDL_DIR)build/" ];\
 	then\
 		echo "$(NAME): $(YELLOW)SDL2 already exists.$(RESET)";\
 	else\
 		mkdir -p $(SDL_DIR)build/;\
+		echo "$(NAME): $(GREEN)Configuring SDL2...$(RESET)";\
 		cd $(SDL_DIR)build/; ../configure --prefix $(MYPATH)/sdl/build;\
 		cd $(MY_PATH);\
 		bash sdl_path.sh;\
-		$(MAKE) -sC $(SDL_DIR)build;/\
+		echo "$(NAME): $(GREEN)Installing SDL2...$(RESET)";\
 		$(MAKE) -sC $(SDL_DIR)build/ install;\
 		echo "$(NAME): $(GREEN)SDL2  was installed.$(RESET)";\
 	fi;
@@ -103,5 +102,6 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "$(NAME): $(YELLOW)$(NAME) was deleted$(RESET)"
 	@rm -fr $(SDL_DIR)build/
+	@echo "$(NAME): $(YELLOW)SDL2 was uninstalled.$(RESET)"
 
 re: fclean all
