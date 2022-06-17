@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 15:46:54 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:29:59 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,9 @@ void	exit_wolf3d(t_core *core)
 	exit(0);
 }
 
-void	init_sdl(t_core *core)
-{
-	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) != 0)
-		error_print(core, "Error: Failed to initialize SDL2");
-	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
-	if (!core->sdl.win)
-		error_print(core, "Error: Failed to create window");
-	core->sdl.rend = SDL_CreateRenderer(core->sdl.win, SDL_RENDERER_SOFTWARE, 0);
-	if (!core->sdl.rend)
-		error_print(core, "Error: Failed to create renderer");
-	SDL_SetRenderDrawColor(core->sdl.rend, 25, 25, 25, 255);
-	SDL_RenderClear(core->sdl.rend);
-	SDL_RenderPresent(core->sdl.rend);
-}
-
 int	main(int argc, char **argv)
 {
 	t_core	core;
-	int		is_runing;
 
 	core.map.matrix = NULL;
 	if (argc != 2)
@@ -65,8 +49,7 @@ int	main(int argc, char **argv)
 	core.map.file = argv[1];
 	ft_putstr("Hello, World!\nYou are visiting ");
 	ft_putendl(core.map.file);
-	read_map(&core);
-	init_sdl(&core);
+	init(&core);
 	//-------------- PRINT MAP
 	int x = 0;
 	int y = 0;
@@ -82,13 +65,14 @@ int	main(int argc, char **argv)
 		y++;
 	}
 	//-----------------------
-	is_runing = 1;
-	while (is_runing == 1)
+	core.is_runing = 1;
+	while (core.is_runing == 1)
 	{
+		render_frame(&core);
 		while (SDL_PollEvent(&core.sdl.event))
 		{
 			if (core.sdl.event.type == SDL_QUIT)
-				is_runing = 0;
+				core.is_runing = 0;
 		}
 	}
 	exit_wolf3d(&core);

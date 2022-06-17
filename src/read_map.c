@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:29:05 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 15:26:02 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:28:25 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	allocate_map(t_core *core)
 	core->map.matrix = (int **)ft_memalloc((core->map.height) * sizeof(int *));
 	if (!core->map.matrix)
 		error_print(core, "Error: Failed to allocate map matrix");
-	while  (i < core->map.height)
+	while (i < core->map.height)
 	{
 		core->map.matrix[i] = (int *)ft_memalloc(core->map.width * sizeof(int));
 		if (!core->map.matrix[i])
@@ -84,7 +84,6 @@ static void	allocate_map(t_core *core)
 		i++;
 	}
 }
-
 
 static void	fill_map_matrix(t_core *core, int fd)
 {

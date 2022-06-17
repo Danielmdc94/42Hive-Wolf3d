@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 13:08:06 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:20:40 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include "get_next_line.h"
 # include <math.h>
 # include <fcntl.h>
+# include <time.h>
 
 /*-----RESOLUTION-----*/
-# define WIN_W 960
-# define WIN_H 640
+# define WIN_W 640
+# define WIN_H 480
 
 /*-----2D VECTORS-----*/
 typedef struct s_vector2
@@ -35,6 +36,8 @@ typedef struct s_player
 {
 	t_vector2	pos;
 	t_vector2	dir;
+	t_vector2	plane;
+	t_vector2	camera_x;
 }				t_player;
 
 /*--------MAP---------*/
@@ -54,20 +57,41 @@ typedef struct s_sdl
 	SDL_Event event;
 }				t_sdl;
 
+/*-------FRAMES-------*/
+typedef struct frames
+{
+	double		time;
+	double		old_time;
+	double		frame_time;
+	double		fps;
+}				t_frames;
+
+
 /*--------CORE--------*/
 typedef struct s_core
 {
 	t_sdl		sdl;
 	t_map		map;
+	int			is_runing;
+	double		time;
+	double		old_time;
 	t_player	player;
+	t_frames	frames;
 }				t_core;
 
 /*--------MAIN--------*/
-void	init_sdl(t_core *core);
 void	exit_wolf3d(t_core *core);
 void	error_print(t_core *core, char *error_msg);
 
+/*--------INIT--------*/
+void	init(t_core *core);
+void	init_sdl(t_core *core);
+void	init_player(t_core *core);
+
 /*------READ MAP------*/
 void	read_map(t_core *core);
+
+/*--------RENDER-------*/
+void	render_frame(t_core *core);
 
 #endif
