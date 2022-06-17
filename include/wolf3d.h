@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 11:40:30 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 13:08:06 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../libft/include/libft.h"
 # include "../sdl/include/SDL.h"
+# include "get_next_line.h"
 # include <math.h>
+# include <fcntl.h>
 
 /*-----RESOLUTION-----*/
 # define WIN_W 960
@@ -40,8 +42,8 @@ typedef struct s_map
 {
 	char		*file;
 	int			**matrix;
-	int			x;
-	int			y;
+	int			width;
+	int			height;
 }				t_map;
 
 /*--------SDL---------*/
@@ -64,5 +66,8 @@ typedef struct s_core
 void	init_sdl(t_core *core);
 void	exit_wolf3d(t_core *core);
 void	error_print(t_core *core, char *error_msg);
+
+/*------READ MAP------*/
+void	read_map(t_core *core);
 
 #endif
