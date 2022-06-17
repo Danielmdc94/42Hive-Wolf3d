@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 23:49:22 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 23:53:08 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ void	render_frame(t_core *core)
 		x++;
 		printf("%f ", core->ray.perp_wall_dis);
 	}
-	exit(0);
+	//exit(0);
 	SDL_RenderPresent(core->sdl.rend);
 }
