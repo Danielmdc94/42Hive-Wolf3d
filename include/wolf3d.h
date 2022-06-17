@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 19:20:40 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:25:48 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_player
 	t_vector2	pos;
 	t_vector2	dir;
 	t_vector2	plane;
-	t_vector2	camera_x;
 }				t_player;
 
 /*--------MAP---------*/
@@ -66,6 +65,28 @@ typedef struct frames
 	double		fps;
 }				t_frames;
 
+/*--------RAY---------*/
+typedef struct ray
+{
+	double		camera_x;
+	t_vector2	dir;
+	t_vector2	map_pos;
+	t_vector2	side_dis;
+	t_vector2	delta_dis;
+	t_vector2	step;
+	double		perp_wall_dis;
+	int			hit;
+	int			face;
+}				t_ray;
+
+/*--------DRAW--------*/
+typedef struct draw
+{
+	int			height;
+	int			start;
+	int			end;
+	int			color;
+}				t_draw;
 
 /*--------CORE--------*/
 typedef struct s_core
@@ -77,6 +98,8 @@ typedef struct s_core
 	double		old_time;
 	t_player	player;
 	t_frames	frames;
+	t_ray		ray;
+	t_draw		draw;
 }				t_core;
 
 /*--------MAIN--------*/

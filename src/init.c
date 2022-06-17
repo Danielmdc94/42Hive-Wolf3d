@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 19:26:01 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/17 23:03:22 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_sdl(t_core *core)
 
 void	init_player(t_core *core)
 {
-	core->player.pos.x = 3;
-	core->player.pos.y = 9;
+	core->player.pos.x = 4;
+	core->player.pos.y = 15;
 	core->player.dir.x = 1;
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;
