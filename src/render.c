@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 23:53:08 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/20 20:13:03 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	render_frame(t_core *core)
 			core->ray.delta_dis.y = pow(1, 30);
 		else
 			core->ray.delta_dis.y = fabs(1 / core->ray.dir.y);
-		core->ray.hit = 0;
 		//calculate step and first ray.side_dist
 		if (core->ray.dir.x < 0)
 		{
@@ -73,6 +72,7 @@ void	render_frame(t_core *core)
 					- core->player.pos.y) * core->ray.delta_dis.y;
 		}
 		//DDA to jump to nex square, either on x or y direction until square is a wall
+		core->ray.hit = 0;
 		while (core->ray.hit == 0)
 		{
 			if (core->ray.side_dis.x < core->ray.side_dis.y)
@@ -89,7 +89,9 @@ void	render_frame(t_core *core)
 			}
 			if (core->map.matrix[(int)core->ray.map_pos.y]
 				[(int)core->ray.map_pos.x] > 0)
-			core->ray.hit = 1;
+			{
+				core->ray.hit = 1;
+			}
 		}
 		//Perpendicular distance from camera to wall (normal distance makes fisheye efect)
 		if (core->ray.face == 0)
@@ -99,7 +101,7 @@ void	render_frame(t_core *core)
 			core->ray.perp_wall_dis = core->ray.side_dis.y
 				- core->ray.delta_dis.y;
 		//heigth of line to draw, starting and ending pixel for the line
-		core->draw.height = WIN_H / core->ray.perp_wall_dis;
+		core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 		core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 		if (core->draw.start < 0)
 			core->draw.start = 0;
@@ -120,8 +122,18 @@ void	render_frame(t_core *core)
 		SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end + 1,
 				x, WIN_H - 1);
 		x++;
-		printf("%f ", core->ray.perp_wall_dis);
+		//------
+
+	/*	if (x > WIN_W / 2 - 2 && x < WIN_W / 2 + 4)
+		{
+			printf("p_dis:%f face:%d r_dir.x: %f r_map.x:%f d_dis.x:%f s_dis.x:%f r_dir.y:%f r_map.y: %f d_dis.y:%f s_dis.y:%f\n", 
+			core->ray.perp_wall_dis, core->ray.face, 
+			core->ray.dir.x, core->ray.map_pos.x, core->ray.delta_dis.x, core->ray.side_dis.x, 
+			core->ray.dir.y, core->ray.map_pos.y, core->ray.delta_dis.y, core->ray.side_dis.y);
+		}
+		if (x == WIN_W - 1)
+			exit(0);
+		//------	*/
 	}
-	//exit(0);
 	SDL_RenderPresent(core->sdl.rend);
 }

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:29:05 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 18:28:25 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:59:33 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,12 @@ static void	fill_map_matrix(t_core *core, int fd)
 
 static void	fill_matrix_line(t_core *core, char **line_array, int y)
 {
-	int	i;
+//	int	i;
 	int	x;
 
-	i = 0;
+//	i = 0;
 	x = 0;
-	while (line_array[x] != '\0')
+	while (line_array[x] != NULL)
 	{
 		core->map.matrix[y][x] = ft_atoi(line_array[x]);
 		x++;
