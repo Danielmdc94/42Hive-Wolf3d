@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/17 22:25:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:22:53 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <time.h>
 
 /*-----RESOLUTION-----*/
-# define WIN_W 640
-# define WIN_H 480
+# define WIN_W 960
+# define WIN_H 640
 
 /*-----2D VECTORS-----*/
 typedef struct s_vector2
@@ -37,6 +37,8 @@ typedef struct s_player
 	t_vector2	pos;
 	t_vector2	dir;
 	t_vector2	plane;
+	double		move_speed;
+	double		rot_speed;
 }				t_player;
 
 /*--------MAP---------*/
@@ -116,5 +118,7 @@ void	read_map(t_core *core);
 
 /*--------RENDER-------*/
 void	render_frame(t_core *core);
+void	raycaster(t_core *core);
+void	render_map(t_core *core);
 
 #endif
