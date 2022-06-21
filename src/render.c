@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/21 18:37:00 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:49:56 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,15 +125,15 @@ void	raycaster(t_core *core)
 		else
 			core->draw.color = 150;
 		//draw the line
-		SDL_SetRenderDrawColor(core->sdl.rend, core->draw.color,
-				core->draw.color, core->draw.color, 255);
+		SDL_SetRenderDrawColor(core->sdl.rend, core->draw.color - core->ray.perp_wall_dis * 5,
+				core->draw.color - core->ray.perp_wall_dis * 5, core->draw.color - core->ray.perp_wall_dis * 5, 255);
 		SDL_RenderDrawLine(core->sdl.rend, x, core->draw.start,
 				x, core->draw.end);
 		SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
 		SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end + 1,
 				x, WIN_H - 1);
 		//------
-		if (x == 480)
+		if (x)
 		{
 			SDL_SetRenderDrawColor(core->sdl.rend, 0, 150, 0, 155);
 			SDL_RenderDrawLine(core->sdl.rend, 
