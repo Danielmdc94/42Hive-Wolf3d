@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/21 14:22:53 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:23:22 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,11 @@ void	read_map(t_core *core);
 
 /*--------RENDER-------*/
 void	render_frame(t_core *core);
-void	raycaster(t_core *core);
 void	render_map(t_core *core);
+
+/*------RAYCASTER------*/
+void	raycaster(t_core *core);
+
+
 
 #endif
