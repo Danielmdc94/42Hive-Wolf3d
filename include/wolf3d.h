@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/27 12:23:22 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:20:24 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 # include <fcntl.h>
 # include <time.h>
 
+////////DEFINITIONS
+
 /*-----RESOLUTION-----*/
 # define WIN_W 960
 # define WIN_H 640
+
+////////STRUCTS
 
 /*-----2D VECTORS-----*/
 typedef struct s_vector2
@@ -37,8 +41,8 @@ typedef struct s_player
 	t_vector2	pos;
 	t_vector2	dir;
 	t_vector2	plane;
-	double		move_speed;
-	double		rot_speed;
+	double		m_speed;
+	double		r_speed;
 }				t_player;
 
 /*--------MAP---------*/
@@ -53,10 +57,10 @@ typedef struct s_map
 /*--------SDL---------*/
 typedef struct s_sdl
 {
-	SDL_Window	*win;
-	SDL_Renderer *rend;
-	SDL_Event event;
-}				t_sdl;
+	SDL_Window		*win;
+	SDL_Renderer	*rend;
+	SDL_Event		event;
+}					t_sdl;
 
 /*-------FRAMES-------*/
 typedef struct frames
@@ -81,6 +85,13 @@ typedef struct ray
 	int			face;
 }				t_ray;
 
+/*--------TEMP-------*/
+typedef struct s_temp
+{
+	double	dir;
+	double	plane;
+}				t_temp;
+
 /*--------DRAW--------*/
 typedef struct draw
 {
@@ -101,8 +112,13 @@ typedef struct s_core
 	t_player	player;
 	t_frames	frames;
 	t_ray		ray;
+	t_temp		temp;
 	t_draw		draw;
 }				t_core;
+
+
+
+////////FUNCTIONS
 
 /*--------MAIN--------*/
 void	exit_wolf3d(t_core *core);
@@ -123,6 +139,7 @@ void	render_map(t_core *core);
 /*------RAYCASTER------*/
 void	raycaster(t_core *core);
 
-
+/*------CONTROLS-------*/
+void	controls(t_core *core);
 
 #endif
