@@ -15,7 +15,7 @@ void	raycaster(t_core *core)
 			* core->ray.camera_x;
 		//what square the payer is on the map
 		core->ray.map_pos.x = (int)core->player.pos.x;
-		core->ray.map_pos.y = (int)core->player.dir.y;
+		core->ray.map_pos.y = (int)core->player.pos.y;
 		//length of ray to the next x and y sides of a square indepenently
 		if (core->ray.dir.x == 0)
 			core->ray.delta_dis.x = pow(1, 30);
@@ -101,7 +101,7 @@ void	raycaster(t_core *core)
 		SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end + 1,
 				x, WIN_H - 1);
 		//------
-		if (x == WIN_W/2 - 1)
+		if (x)
 		{
 			SDL_SetRenderDrawColor(core->sdl.rend, 0, 150, 0, 155);
 			SDL_RenderDrawLine(core->sdl.rend, 
@@ -109,8 +109,10 @@ void	raycaster(t_core *core)
 			(core->player.pos.y * 10), 
 			WIN_W - 10 * core->map.width + (core->player.pos.x * 10) + core->ray.dir.x * core->ray.perp_wall_dis * 10, 
 			(core->player.pos.y * 10) + core->ray.dir.y * core->ray.perp_wall_dis * 10);
-			printf("\nRAY	WALL DISTANCE	FACE	DIR.X		DIR.Y		MAP.X		MAP.Y		DELTA.X		DELTA.Y		SIDE.X		SIDE.Y\n%d	%f	%d	%f	%f	%f	%f	%f	%f	%f	%f", x, core->ray.perp_wall_dis, core->ray.face, core->ray.dir.x, core->ray.dir.y,
-				core->ray.map_pos.x, core->ray.map_pos.y, core->ray.delta_dis.x, core->ray.delta_dis.y, core->ray.side_dis.x, core->ray.side_dis.y);
+			printf("\nRAY	WALL DISTANCE	FACE	DIR.X		DIR.Y		MAP.X		MAP.Y		STEP.X		STEP.Y		DELTA.X		DELTA.Y		SIDE.X		SIDE.Y\n%d	%f	%d	%f	%f	%f	%f	%f	%f	%f	%f	%f	%f", x,
+				core->ray.perp_wall_dis, core->ray.face, core->ray.dir.x, core->ray.dir.y, core->ray.map_pos.x,
+				core->ray.map_pos.y, core->ray.step.x, core->ray.step.y, core->ray.delta_dis.x, core->ray.delta_dis.y,
+				core->ray.side_dis.x, core->ray.side_dis.y);
 		}
 		//------
 		x++;
