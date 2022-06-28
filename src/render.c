@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/27 20:24:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:46:34 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_frame(t_core *core)
 	core->player.m_speed = core->frames.frame_time * 30;
 	core->player.r_speed = core->frames.frame_time * 18;
 //-------
-//	printf("%f\n", core->frames.fps);
+	printf("%f\n", core->frames.fps);
 //-------
 	raycaster(core);
 	render_map(core);
