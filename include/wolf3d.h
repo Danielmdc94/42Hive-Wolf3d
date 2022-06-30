@@ -6,15 +6,15 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/28 17:45:25 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:59:56 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
-# define FRACTOL_H
+# define WOLF3D_H
 
 # include "../libft/include/libft.h"
-# include "../sdl/include/SDL.h"
+# include "../SDL/SDL2.framework/Versions/A/Headers/SDL.h"
 # include "get_next_line.h"
 # include <math.h>
 # include <fcntl.h>
