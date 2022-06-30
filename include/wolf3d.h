@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/30 16:59:56 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:48:00 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../libft/include/libft.h"
 # include "../SDL/SDL2.framework/Versions/A/Headers/SDL.h"
+# include "../SDL/SDL2_image.framework/Versions/A/Headers/SDL_image.h"
+# include "../SDL/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h"
 # include "get_next_line.h"
 # include <math.h>
 # include <fcntl.h>
@@ -60,6 +62,8 @@ typedef struct s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*rend;
 	SDL_Event		event;
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
 }					t_sdl;
 
 /*-------FRAMES-------*/
