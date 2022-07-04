@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 15:01:46 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:45:30 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	core.is_runing = 1;
 	while (core.is_runing == 1)
 	{
-//		render_frame(&core);
+		render_frame(&core);
 		while (SDL_PollEvent(&core.sdl.event))
 			controls(&core);
 	}

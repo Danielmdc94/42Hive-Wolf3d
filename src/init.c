@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 15:08:42 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:57:33 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,26 @@ void	init_sdl(t_core *core)
 	if (!core->sdl.rend)
 		error_print(core, "Error: Failed to create renderer");
 
-	core->sdl.surface = SDL_LoadBMP("textures/mossy.bmp");
+	core->sdl.surface = SDL_LoadBMP("textures/bluestone.bmp");
 	if (!core->sdl.surface)
 		error_print(core, "Error: Failed to load texture");
 	//-------------
 	core->sdl.texture = SDL_CreateTextureFromSurface(core->sdl.rend, core->sdl.surface);
+/*	SDL_Rect	tex;
+	SDL_Rect	screen;
+
+	tex.x = 0;
+	tex.y = 0;
+	tex.w = 1;
+	tex.h = core->sdl.surface->h;
 	
-	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, NULL, NULL);
-	SDL_RenderPresent(core->sdl.rend);
+	screen.x = WIN_W / 4;
+	screen.y = WIN_H / 4;
+	screen.w = 1;
+	screen.h = core->sdl.surface->h * 4;
+
+	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, &tex, &screen);
+	SDL_RenderPresent(core->sdl.rend);*/
 }
 
 void	init_player(t_core *core)

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 15:05:04 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 16:57:58 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,12 @@ static void	calculate_distance(t_core *core)
  */
 static void	draw_line(t_core *core, int x)
 {
-/*	double	wall_x;
-	int		tex_x;
-	int		tex_y;
-	double	step;
-	double	tex_pos;
-	int		y;
-	int		color;
-*/
+	double	wall_x;
+
+	SDL_Rect	wall;
+	SDL_Rect	texture;
+
+
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 	if (core->draw.start < 0)
@@ -161,28 +159,26 @@ static void	draw_line(t_core *core, int x)
 	if (core->draw.end >= WIN_H)
 		core->draw.end = WIN_H - 1;
 	//--------
-/*	if (core->ray.face == 0)
+	if (core->ray.face == 0)
 		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
 	else
 		wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
 	wall_x -= floor(wall_x);
-	tex_x = (int)(wall_x * (double)(core->sdl.texture->w));
+	texture.x = (int)(wall_x * (double)(core->sdl.surface->w));
 	if (core->ray.face == 0 && core->ray.dir.x > 0)
-		tex_x = core->sdl.texture->w - tex_x - 1;
+		texture.x = core->sdl.surface->w - texture.x - 1;
 	if (core->ray.face == 1 && core->ray.dir.y < 0)
-		tex_x = core->sdl.texture->w - tex_x - 1;
-	step = 1.0 * core->sdl.texture->h / core->draw.height;
-	tex_pos = (core->draw.start - WIN_H / 2 + core->draw.height / 2) * step;
-	y = core->draw.start;
-	while (y < core->draw.end)
-	{
-		tex_y = (int)tex_pos & (core->sdl.texture->h - 1);
-		tex_pos += step;
-		color = core->sdl.texture->pixels[core->sdl.texture->h * tex_y + tex_x];
-		y++;
-	}
-
-*/	if (core->ray.face == 0)
+		texture.x = core->sdl.surface->w - texture.x - 1;
+	wall.x = x;
+	wall.y = core->draw.start;
+	wall.w = 1;
+	wall.h = core->draw.height;
+	texture.y = 0;
+	texture.w = 1;
+	texture.h = core->sdl.surface->h;
+	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, &texture, &wall);
+/*-----FLAT COLORING
+	if (core->ray.face == 0)
 		core->draw.color = 200;
 	else
 		core->draw.color = 150;
@@ -192,7 +188,7 @@ static void	draw_line(t_core *core, int x)
 		core->draw.color - core->ray.perp_wall_dis * 5, 255);
 	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.start,
 		x, core->draw.end);
-	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
-	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end + 1,
+*/	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
+	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end,
 		x, WIN_H - 1);
 }
