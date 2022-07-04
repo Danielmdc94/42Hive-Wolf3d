@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/30 23:05:33 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 11:11:01 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,13 +145,13 @@ static void	calculate_distance(t_core *core)
  */
 static void	draw_line(t_core *core, int x)
 {
-	double	wall_x;
-	int		tex_x;
-	int		tex_y;
-	double	step;
-	double	tex_pos;
-	int		y;
-	int		color;
+//	double	wall_x;
+//	int		tex_x;
+//	int		tex_y;
+//	double	step;
+//	double	tex_pos;
+//	int		y;
+//	int		color;
 
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
@@ -161,7 +161,7 @@ static void	draw_line(t_core *core, int x)
 	if (core->draw.end >= WIN_H)
 		core->draw.end = WIN_H - 1;
 	//--------
-	if (core->ray.face = 0)
+/*	if (core->ray.face = 0)
 		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
 	else
 		wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
@@ -182,7 +182,7 @@ static void	draw_line(t_core *core, int x)
 		y++;
 	}
 
-/*	if (core->ray.face == 0)
+*/	if (core->ray.face == 0)
 		core->draw.color = 200;
 	else
 		core->draw.color = 150;
@@ -194,5 +194,5 @@ static void	draw_line(t_core *core, int x)
 		x, core->draw.end);
 	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
 	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end + 1,
-		x, WIN_H - 1);*/
+		x, WIN_H - 1);
 }
