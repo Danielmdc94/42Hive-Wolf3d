@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/30 23:05:35 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:08:42 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ void	init_sdl(t_core *core)
 			SDL_RENDERER_SOFTWARE, 0);
 	if (!core->sdl.rend)
 		error_print(core, "Error: Failed to create renderer");
-	core->sdl.surface = IMG_Load("textures/greystone.png");
+
+	core->sdl.surface = SDL_LoadBMP("textures/mossy.bmp");
 	if (!core->sdl.surface)
 		error_print(core, "Error: Failed to load texture");
 	//-------------
 	core->sdl.texture = SDL_CreateTextureFromSurface(core->sdl.rend, core->sdl.surface);
-//	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, NULL, NULL);
-//	SDL_RenderPresent(core->sdl.rend);
+	
+	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, NULL, NULL);
+	SDL_RenderPresent(core->sdl.rend);
 }
 
 void	init_player(t_core *core)

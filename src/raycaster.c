@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 11:11:01 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:05:04 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,14 @@ static void	calculate_distance(t_core *core)
  */
 static void	draw_line(t_core *core, int x)
 {
-//	double	wall_x;
-//	int		tex_x;
-//	int		tex_y;
-//	double	step;
-//	double	tex_pos;
-//	int		y;
-//	int		color;
-
+/*	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	int		y;
+	int		color;
+*/
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 	if (core->draw.start < 0)
@@ -161,24 +161,24 @@ static void	draw_line(t_core *core, int x)
 	if (core->draw.end >= WIN_H)
 		core->draw.end = WIN_H - 1;
 	//--------
-/*	if (core->ray.face = 0)
+/*	if (core->ray.face == 0)
 		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
 	else
 		wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
 	wall_x -= floor(wall_x);
-	tex_x = int(wall_x * double(core->sdl.texture.w));
-	if (core->ray.face = 0 && core->ray.dir.x > 0)
-		tex_x = core->sdl.texture.w - tex_x - 1;
-	if (core->ray.face = 1 && core->ray.dir.y < 0)
-		tex_x = core->sdl.texture.w - tex_x - 1;
-	step = 1.0 * core->sdl.texture.h / core->draw.height;
+	tex_x = (int)(wall_x * (double)(core->sdl.texture->w));
+	if (core->ray.face == 0 && core->ray.dir.x > 0)
+		tex_x = core->sdl.texture->w - tex_x - 1;
+	if (core->ray.face == 1 && core->ray.dir.y < 0)
+		tex_x = core->sdl.texture->w - tex_x - 1;
+	step = 1.0 * core->sdl.texture->h / core->draw.height;
 	tex_pos = (core->draw.start - WIN_H / 2 + core->draw.height / 2) * step;
 	y = core->draw.start;
 	while (y < core->draw.end)
 	{
-		tex_y = (int)tex_pos & (core->sdl.texture.h - 1);
+		tex_y = (int)tex_pos & (core->sdl.texture->h - 1);
 		tex_pos += step;
-		color = core->sdl.texture->pixels[core->sdl.texture.h * tex_y + tex_x];
+		color = core->sdl.texture->pixels[core->sdl.texture->h * tex_y + tex_x];
 		y++;
 	}
 
