@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 16:57:58 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/04 17:27:33 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,16 +149,27 @@ static void	draw_line(t_core *core, int x)
 
 	SDL_Rect	wall;
 	SDL_Rect	texture;
+	wall.x = x;
+	wall.y = core->draw.start;
+	wall.w = 1;
+	wall.h = core->draw.height;
+	texture.y = 0;
+	texture.w = 1;
+	texture.h = core->sdl.surface->h;
 
 
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
+//
+//	if (core->draw.start < 0)
+//		texture.y += core->draw.start / 64 * ;
+//
 	if (core->draw.start < 0)
 		core->draw.start = 0;
 	core->draw.end = (core->draw.height) / 2 + WIN_H / 2;
 	if (core->draw.end >= WIN_H)
 		core->draw.end = WIN_H - 1;
-	//--------
+//--------TEXTURED
 	if (core->ray.face == 0)
 		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
 	else
@@ -169,13 +180,6 @@ static void	draw_line(t_core *core, int x)
 		texture.x = core->sdl.surface->w - texture.x - 1;
 	if (core->ray.face == 1 && core->ray.dir.y < 0)
 		texture.x = core->sdl.surface->w - texture.x - 1;
-	wall.x = x;
-	wall.y = core->draw.start;
-	wall.w = 1;
-	wall.h = core->draw.height;
-	texture.y = 0;
-	texture.w = 1;
-	texture.h = core->sdl.surface->h;
 	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, &texture, &wall);
 /*-----FLAT COLORING
 	if (core->ray.face == 0)
