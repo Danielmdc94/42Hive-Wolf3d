@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 17:27:33 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:39:47 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	raycaster(t_core *core)
 		calculate_step(core);
 		calculate_distance(core);
 		draw_line(core, x);
-		//------
+		//------DRAW RAYS MINIMAP
 		if (x)
 		{
 			SDL_SetRenderDrawColor(core->sdl.rend, 0, 150, 0, 155);
@@ -42,13 +42,10 @@ void	raycaster(t_core *core)
 				(core->player.pos.y * 10),
 				WIN_W - 10 * core->map.width + (core->player.pos.x * 10)
 				+ core->ray.dir.x * core->ray.perp_wall_dis * 10,
-				(core->player.pos.y * 10) + core->ray.dir.y * core->ray.perp_wall_dis * 10);
-/*			printf("\nRAY	WALL DISTANCE	FACE	DIR.X		DIR.Y		MAP.X		MAP.Y		STEP.X		STEP.Y		DELTA.X		DELTA.Y		SIDE.X		SIDE.Y\n%d	%f	%d	%f	%f	%f	%f	%f	%f	%f	%f	%f	%f", x,
-				core->ray.perp_wall_dis, core->ray.face, core->ray.dir.x, core->ray.dir.y, core->ray.map_pos.x,
-				core->ray.map_pos.y, core->ray.step.x, core->ray.step.y, core->ray.delta_dis.x, core->ray.delta_dis.y,
-				core->ray.side_dis.x, core->ray.side_dis.y);
-		*/
+				(core->player.pos.y * 10) + core->ray.dir.y
+				* core->ray.perp_wall_dis * 10);
 		}
+		//-----------------------
 		x++;
 	}
 }
@@ -145,42 +142,36 @@ static void	calculate_distance(t_core *core)
  */
 static void	draw_line(t_core *core, int x)
 {
-	double	wall_x;
-
+	double		wall_x;
 	SDL_Rect	wall;
 	SDL_Rect	texture;
+
 	wall.x = x;
 	wall.y = core->draw.start;
 	wall.w = 1;
 	wall.h = core->draw.height;
 	texture.y = 0;
 	texture.w = 1;
-	texture.h = core->sdl.surface->h;
-
-
+	texture.h = core->textures.surface->h;
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
-//
-//	if (core->draw.start < 0)
-//		texture.y += core->draw.start / 64 * ;
-//
-	if (core->draw.start < 0)
-		core->draw.start = 0;
 	core->draw.end = (core->draw.height) / 2 + WIN_H / 2;
-	if (core->draw.end >= WIN_H)
-		core->draw.end = WIN_H - 1;
 //--------TEXTURED
 	if (core->ray.face == 0)
 		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
 	else
 		wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
 	wall_x -= floor(wall_x);
-	texture.x = (int)(wall_x * (double)(core->sdl.surface->w));
+	texture.x = (int)(wall_x * (double)(core->textures.surface->w));
 	if (core->ray.face == 0 && core->ray.dir.x > 0)
-		texture.x = core->sdl.surface->w - texture.x - 1;
+		texture.x = core->textures.surface->w - texture.x - 1;
 	if (core->ray.face == 1 && core->ray.dir.y < 0)
-		texture.x = core->sdl.surface->w - texture.x - 1;
-	SDL_RenderCopy(core->sdl.rend, core->sdl.texture, &texture, &wall);
+		texture.x = core->textures.surface->w - texture.x - 1;
+	if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 1)
+		SDL_RenderCopy(core->sdl.rend, core->textures.wood, &texture, &wall);
+	else
+		SDL_RenderCopy(core->sdl.rend, core->textures.greystone, &texture, &wall);
 /*-----FLAT COLORING
 	if (core->ray.face == 0)
 		core->draw.color = 200;
@@ -191,8 +182,8 @@ static void	draw_line(t_core *core, int x)
 		core->draw.color - core->ray.perp_wall_dis * 5,
 		core->draw.color - core->ray.perp_wall_dis * 5, 255);
 	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.start,
-		x, core->draw.end);
-*/	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
+		x, core->draw.end);*/
+	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
 	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end,
 		x, WIN_H - 1);
 }

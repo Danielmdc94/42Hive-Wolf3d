@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 16:45:30 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:07:42 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,6 @@ int	main(int argc, char **argv)
 	ft_putstr("Hello, World!\nYou are visiting ");
 	ft_putendl(core.map.file);
 	init(&core);
-	//-------------- PRINT MAP
-	int x = 0;
-	int y = 0;
-	while (y < core.map.height)
-	{
-		while (x < core.map.width)
-		{
-			printf("%d ", core.map.matrix[y][x]);
-			x++;
-		}
-		printf("\n");
-		x = 0;
-		y++;
-	}
-	//-----------------------
 	core.is_runing = 1;
 	while (core.is_runing == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/28 14:50:09 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:04:48 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ static void	move(t_core *core)
 {
 	if (core->sdl.event.key.keysym.sym == SDLK_w)
 	{
-		if (core->map.matrix[(int)(core->player.pos.y)][(int)(core->player.pos.x + core->player.dir.x * core->player.m_speed)] == 0)
+		if (core->map.matrix[(int)(core->player.pos.y)]
+				[(int)(core->player.pos.x + core->player.dir.x
+				* core->player.m_speed)] == 0)
 			core->player.pos.x += core->player.dir.x * core->player.m_speed;
-		if (core->map.matrix[(int)(core->player.pos.y + core->player.dir.y * core->player.m_speed)][(int)(core->player.pos.x)] == 0)
+		if (core->map.matrix[(int)(core->player.pos.y
+				+ core->player.dir.y * core->player.m_speed)]
+				[(int)(core->player.pos.x)] == 0)
 			core->player.pos.y += core->player.dir.y * core->player.m_speed;
 	}
 	if (core->sdl.event.key.keysym.sym == SDLK_s)

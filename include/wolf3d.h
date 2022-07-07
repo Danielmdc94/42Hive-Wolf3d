@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/04 15:15:21 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:39:49 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,15 @@ typedef struct s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*rend;
 	SDL_Event		event;
-	SDL_Surface		*surface;
-	SDL_Texture		*texture;
 }					t_sdl;
+
+/*------TEXTURES------*/
+typedef struct textures
+{
+	SDL_Surface		*surface;
+	SDL_Texture		*wood;
+	SDL_Texture		*greystone;
+}					t_textures;
 
 /*-------FRAMES-------*/
 typedef struct frames
@@ -109,6 +115,7 @@ typedef struct draw
 typedef struct s_core
 {
 	t_sdl		sdl;
+	t_textures	textures;
 	t_map		map;
 	int			is_runing;
 	double		time;
@@ -132,7 +139,7 @@ void	error_print(t_core *core, char *error_msg);
 void	init(t_core *core);
 void	init_sdl(t_core *core);
 void	init_player(t_core *core);
-
+void	init_textures(t_core *core);
 /*------READ MAP------*/
 void	read_map(t_core *core);
 
