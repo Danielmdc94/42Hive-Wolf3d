@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 16:01:39 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:11:38 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ typedef struct textures
 	SDL_Surface		*surface;
 	SDL_Texture		*wood;
 	SDL_Texture		*greystone;
+	SDL_Texture		*colorstone;
+	SDL_Texture		*bluestone;
+	SDL_Texture		*redbrick;
+
 }					t_textures;
 
 /*-------FRAMES-------*/

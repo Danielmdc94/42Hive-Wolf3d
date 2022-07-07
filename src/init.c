@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 16:01:29 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:11:49 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,20 @@ void	init_textures(t_core *core)
 	if (!core->textures.surface)
 		error_print(core, "Error: Failed to load texture");
 	core->textures.greystone = SDL_CreateTextureFromSurface(core->sdl.rend,
+			core->textures.surface);
+	core->textures.surface = SDL_LoadBMP("textures/colorstone.bmp");
+	if (!core->textures.surface)
+		error_print(core, "Error: Failed to load texture");
+	core->textures.colorstone = SDL_CreateTextureFromSurface(core->sdl.rend,
+			core->textures.surface);
+	core->textures.surface = SDL_LoadBMP("textures/bluestone.bmp");
+	if (!core->textures.surface)
+		error_print(core, "Error: Failed to load texture");
+	core->textures.bluestone = SDL_CreateTextureFromSurface(core->sdl.rend,
+			core->textures.surface);
+	core->textures.surface = SDL_LoadBMP("textures/redbrick.bmp");
+	if (!core->textures.surface)
+		error_print(core, "Error: Failed to load texture");
+	core->textures.redbrick = SDL_CreateTextureFromSurface(core->sdl.rend,
 			core->textures.surface);
 }
