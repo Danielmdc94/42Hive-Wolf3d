@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 15:39:49 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:01:39 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_core
 	t_textures	textures;
 	t_map		map;
 	int			is_runing;
+	int			is_textured;
 	double		time;
 	double		old_time;
 	t_player	player;
@@ -143,14 +144,18 @@ void	init_textures(t_core *core);
 /*------READ MAP------*/
 void	read_map(t_core *core);
 
-/*--------RENDER-------*/
+/*-------RENDER-------*/
 void	render_frame(t_core *core);
 void	render_map(t_core *core);
 
-/*------RAYCASTER------*/
+/*------RAYCASTER-----*/
 void	raycaster(t_core *core);
 
-/*------CONTROLS-------*/
+/*---------DRAW-------*/
+void	draw_wall_textured(t_core *core, int x);
+void	draw_wall_flat(t_core *core, int x);
+
+/*------CONTROLS------*/
 void	controls(t_core *core);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 15:30:12 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:01:29 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init(t_core *core)
 	init_sdl(core);
 	init_textures(core);
 	init_player(core);
+	core->is_runing = 1;
+	core->is_textured = 1;
 	core->time = 0;
 	core->old_time = 0;
 }

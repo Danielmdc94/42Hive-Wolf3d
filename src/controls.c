@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 15:04:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:04:44 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ static void	on_keydown(t_core *core)
 		rotate(core);
 	if (core->sdl.event.key.keysym.sym == SDLK_ESCAPE)
 		core->is_runing = 0;
+	if (core->sdl.event.key.keysym.sym == SDLK_t && core->is_textured == 0)
+		core->is_textured = 1;
+	else if (core->sdl.event.key.keysym.sym == SDLK_t && core->is_textured == 1)
+		core->is_textured = 0;
 }
 
 static void	move(t_core *core)
