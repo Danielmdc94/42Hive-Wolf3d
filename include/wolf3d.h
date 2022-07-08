@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 19:19:46 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:33:10 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	raycaster(t_core *core);
 void	draw_wall_textured(t_core *core, int x);
 void	draw_wall_flat(t_core *core, int x);
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-
+Uint32	get_pixel(SDL_Surface *surface, int x, int y);
 /*------CONTROLS------*/
 void	controls(t_core *core);
 
