@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 16:14:28 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 20:00:21 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	init_textures(t_core *core)
 		error_print(core, "Error: Failed to load texture");
 	core->textures.redbrick = SDL_CreateTextureFromSurface(core->sdl.rend,
 			core->textures.surface);
+	SDL_ConvertSurface(core->textures.surface, core->sdl.screen->format, 0);
 }

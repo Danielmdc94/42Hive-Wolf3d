@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 19:44:57 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 20:14:08 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_wall_textured(t_core *core, int x)
 		tex_x = core->textures.surface->w - tex_x - 1;
 	if (core->ray.face == 1 && core->ray.dir.y < 0)
 		tex_x = core->textures.surface->w - tex_x - 1;
-	step = (core->textures.surface->h) / core->draw.height;
+	step = 1.0 * (core->textures.surface->h) / core->draw.height;
 	tex_pos = (core->draw.start - WIN_H / 2 + core->draw.height / 2) * step;
 	y = core->draw.start;
 	while (y < core->draw.end)
@@ -35,7 +35,7 @@ void	draw_wall_textured(t_core *core, int x)
 		tex_y = (int)tex_pos & (core->textures.surface->h - 1);
 		tex_pos += step;
 		set_pixel(core->sdl.screen, x, y,
-			get_pixel(core->textures.surface, tex_x, tex_pos));
+			get_pixel(core->textures.surface, tex_x, tex_y));
 		y++;
 	}
 }
