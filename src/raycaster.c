@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 16:01:51 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:08:36 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,14 +137,20 @@ static void	calculate_distance(t_core *core)
 			- core->ray.delta_dis.y;
 }
 
-/* Draws a vertical line, depending on the perpendicular distance of
- * the ray, on the corresponding pixel column.
+/* Sets, depending on the distance to the wall, the height of the wall
+ * on screen and what x coordinate of said wall was hit. Then calls a
+ * function to dray this line with textures or flat colors.
  */
 static void	draw_line(t_core *core, int x)
 {
 	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 	core->draw.end = (core->draw.height) / 2 + WIN_H / 2;
+	if (core->ray.face == 0)
+		core->ray.wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
+	else
+		core->ray.wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
+	core->ray.wall_x -= floor(core->ray.wall_x);
 	if (core->is_textured == 0)
 		draw_wall_flat(core, x);
 	else

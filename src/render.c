@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 14:19:14 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:11:09 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ void	render_frame(t_core *core)
 	core->player.m_speed = core->frames.frame_time * 30;
 	core->player.r_speed = core->frames.frame_time * 18;
 //-------
-	printf("%f\n", core->frames.fps);
+//	printf("%f\n", core->frames.fps);
 //-------
 	raycaster(core);
+	SDL_BlitSurface(core->textures.surface, NULL, core->sdl.screen, NULL);
+	SDL_UpdateWindowSurface(core->sdl.win);
 	render_map(core);
 	SDL_RenderPresent(core->sdl.rend);
+	printf("%d\n", core->sdl.screen->format->BytesPerPixel);
 }
 
 //Testing minimap

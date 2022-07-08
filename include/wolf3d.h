@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 16:11:38 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:19:46 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_map
 typedef struct s_sdl
 {
 	SDL_Window		*win;
+	SDL_Surface		*screen;
+	Uint32			*pixels;
 	SDL_Renderer	*rend;
 	SDL_Event		event;
 }					t_sdl;
@@ -97,6 +99,7 @@ typedef struct ray
 	double		perp_wall_dis;
 	int			hit;
 	int			face;
+	double		wall_x;
 }				t_ray;
 
 /*--------TEMP-------*/
@@ -158,6 +161,7 @@ void	raycaster(t_core *core);
 /*---------DRAW-------*/
 void	draw_wall_textured(t_core *core, int x);
 void	draw_wall_flat(t_core *core, int x);
+void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 
 /*------CONTROLS------*/
 void	controls(t_core *core);

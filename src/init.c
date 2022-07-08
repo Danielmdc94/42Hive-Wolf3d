@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/07 16:11:49 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:14:28 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_sdl(t_core *core)
 		error_print(core, "Error: Failed to create window");
 	core->sdl.rend = SDL_CreateRenderer(core->sdl.win,
 			SDL_RENDERER_SOFTWARE, 0);
+	core->sdl.screen = SDL_GetWindowSurface(core->sdl.win);
 	if (!core->sdl.rend)
 		error_print(core, "Error: Failed to create renderer");
 }
