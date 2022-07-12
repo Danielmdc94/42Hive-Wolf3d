@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 14:48:17 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:26:06 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ void	draw_wall_textured(t_core *core, int x)
 		y++;
 	}
 }
-/*	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 2)
-		SDL_RenderCopy(core->sdl.rend, core->textures.greystone,
-			&texture, &wall);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 3)
-		SDL_RenderCopy(core->sdl.rend, core->textures.colorstone,
-			&texture, &wall);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 4)
-		SDL_RenderCopy(core->sdl.rend, core->textures.bluestone,
-			&texture, &wall);
-	else
-		SDL_RenderCopy(core->sdl.rend, core->textures.redbrick,
-			&texture, &wall);
-}
-*/
 
 SDL_Surface	*choose_texture(t_core *core)
 {

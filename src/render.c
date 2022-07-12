@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 12:42:38 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:21:51 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 void	render_frame(t_core *core)
 {
+	Uint64	start;
+	Uint64	end;
+	float	elapsed;
+
+	SDL_FillRect(core->sdl.screen, NULL, 0x000000);
+	start = SDL_GetPerformanceCounter();
 //	SDL_SetRenderDrawColor(core->sdl.rend, 25, 25, 25, 255);
 //	SDL_RenderClear(core->sdl.rend);
-	core->frames.old_time = core->frames.time;
-	core->frames.time = clock();
-	core->frames.frame_time = (core->frames.time - core->frames.old_time)
-		/ CLOCKS_PER_SEC;
-	core->frames.fps = 1.0 / core->frames.frame_time;
-	SDL_Delay(1000 / 60 - core->frames.frame_time / 1000);
-	core->player.m_speed = core->frames.frame_time * 30;
-	core->player.r_speed = core->frames.frame_time * 18;
-//-------
-	printf("%f\n", core->frames.fps);
-//-------
+
 	raycaster(core);
-//	SDL_BlitSurface(core->textures.surface, NULL, core->sdl.screen, NULL);
 	SDL_UpdateWindowSurface(core->sdl.win);
-	SDL_FillRect(core->sdl.screen, NULL, 0x000000);
 //	render_map(core);
 //	SDL_RenderPresent(core->sdl.rend);
+	end = SDL_GetPerformanceCounter();
+	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
+	core->player.m_speed = elapsed * 40.0;
+	core->player.r_speed = elapsed * 24.0;
+	core->fps = 1.0f / elapsed;
+	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
+//-------
+	printf("%f\n", core->fps);
+	printf("%f\n", core->player.m_speed);
+//-------
+
 }
 
 //Testing minimap

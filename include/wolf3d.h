@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 14:44:00 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:14:47 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ typedef struct s_core
 	t_map		map;
 	int			is_runing;
 	int			is_textured;
-	double		time;
-	double		old_time;
+	double		fps;
 	t_player	player;
 	t_frames	frames;
 	t_ray		ray;
