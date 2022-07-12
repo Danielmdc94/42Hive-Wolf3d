@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 20:06:50 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:42:38 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	render_frame(t_core *core)
 {
 //	SDL_SetRenderDrawColor(core->sdl.rend, 25, 25, 25, 255);
-	SDL_RenderClear(core->sdl.rend);
+//	SDL_RenderClear(core->sdl.rend);
 	core->frames.old_time = core->frames.time;
 	core->frames.time = clock();
 	core->frames.frame_time = (core->frames.time - core->frames.old_time)
@@ -28,11 +28,11 @@ void	render_frame(t_core *core)
 	printf("%f\n", core->frames.fps);
 //-------
 	raycaster(core);
-	SDL_BlitSurface(core->textures.surface, NULL, core->sdl.screen, NULL);
+//	SDL_BlitSurface(core->textures.surface, NULL, core->sdl.screen, NULL);
 	SDL_UpdateWindowSurface(core->sdl.win);
-	render_map(core);
-	SDL_RenderPresent(core->sdl.rend);
-//	printf("%d\n", core->textures.surface->format->BytesPerPixel);d
+	SDL_FillRect(core->sdl.screen, NULL, 0x000000);
+//	render_map(core);
+//	SDL_RenderPresent(core->sdl.rend);
 }
 
 //Testing minimap

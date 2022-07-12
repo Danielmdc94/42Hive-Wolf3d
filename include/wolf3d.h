@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 20:05:01 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:44:00 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,11 @@ typedef struct s_sdl
 /*------TEXTURES------*/
 typedef struct textures
 {
-	SDL_Surface		*surface;
-	SDL_Texture		*wood;
-	SDL_Texture		*greystone;
-	SDL_Texture		*colorstone;
-	SDL_Texture		*bluestone;
-	SDL_Texture		*redbrick;
+	SDL_Surface		*wood;
+	SDL_Surface		*greystone;
+	SDL_Surface		*colorstone;
+	SDL_Surface		*bluestone;
+	SDL_Surface		*redbrick;
 
 }					t_textures;
 
@@ -159,10 +158,11 @@ void	render_map(t_core *core);
 void	raycaster(t_core *core);
 
 /*---------DRAW-------*/
-void	draw_wall_textured(t_core *core, int x);
-void	draw_wall_flat(t_core *core, int x);
-void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-Uint32	get_pixel(SDL_Surface *surface, int x, int y);
+void		draw_wall_textured(t_core *core, int x);
+void		draw_wall_flat(t_core *core, int x);
+void		set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+Uint32		get_pixel(SDL_Surface *surface, int x, int y);
+SDL_Surface	*choose_texture(t_core *core);
 
 /*------CONTROLS------*/
 void	controls(t_core *core);

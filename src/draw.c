@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 20:14:08 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:48:17 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,54 +21,24 @@ void	draw_wall_textured(t_core *core, int x)
 	int			y;
 	double		tex_pos;
 
-
-	tex_x = (int)(core->ray.wall_x * (double)(core->textures.surface->w));
+	tex_x = (int)(core->ray.wall_x * (double)(core->textures.wood->w));
 	if (core->ray.face == 0 && core->ray.dir.x > 0)
-		tex_x = core->textures.surface->w - tex_x - 1;
+		tex_x = core->textures.wood->w - tex_x - 1;
 	if (core->ray.face == 1 && core->ray.dir.y < 0)
-		tex_x = core->textures.surface->w - tex_x - 1;
-	step = 1.0 * (core->textures.surface->h) / core->draw.height;
+		tex_x = core->textures.wood->w - tex_x - 1;
+	step = 1.0 * (core->textures.wood->h) / core->draw.height;
 	tex_pos = (core->draw.start - WIN_H / 2 + core->draw.height / 2) * step;
 	y = core->draw.start;
 	while (y < core->draw.end)
 	{
-		tex_y = (int)tex_pos & (core->textures.surface->h - 1);
+		tex_y = (int)tex_pos & (core->textures.wood->h - 1);
 		tex_pos += step;
 		set_pixel(core->sdl.screen, x, y,
-			get_pixel(core->textures.surface, tex_x, tex_y));
+			get_pixel(choose_texture(core), tex_x, tex_y));
 		y++;
 	}
 }
-/*
-void	draw_wall_textured(t_core *core, int x)
-{
-	double		wall_x;
-	SDL_Rect	wall;
-	SDL_Rect	texture;
-
-	wall.x = x;
-	wall.y = core->draw.start;
-	wall.w = 1;
-	wall.h = core->draw.height;
-	texture.y = 0;
-	texture.w = 1;
-	texture.h = core->textures.surface->h;
-	if (core->ray.face == 0)
-		wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
-	else
-		wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
-	wall_x -= floor(wall_x);
-	texture.x = (int)(wall_x * (double)(core->textures.surface->w));
-	if (core->ray.face == 0 && core->ray.dir.x > 0)
-		texture.x = core->textures.surface->w - texture.x - 1;
-	if (core->ray.face == 1 && core->ray.dir.y < 0)
-		texture.x = core->textures.surface->w - texture.x - 1;
-
-//	if (core->map.matrix[(int)core->ray.map_pos.y]
-//		[(int)core->ray.map_pos.x] != 0)
-//		SDL_RenderCopy(core->sdl.rend, core->textures.wood, &texture, &wall);
-//		SDL_BlitSurface(core->textures.surface, &texture, core->sdl.screen, &wall);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
+/*	else if (core->map.matrix[(int)core->ray.map_pos.y]
 		[(int)core->ray.map_pos.x] == 2)
 		SDL_RenderCopy(core->sdl.rend, core->textures.greystone,
 			&texture, &wall);
@@ -85,6 +55,26 @@ void	draw_wall_textured(t_core *core, int x)
 			&texture, &wall);
 }
 */
+
+SDL_Surface	*choose_texture(t_core *core)
+{
+	if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 1)
+		return (core->textures.greystone);
+	else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 2)
+		return (core->textures.colorstone);
+	else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 3)
+		return (core->textures.bluestone);
+	else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 4)
+		return (core->textures.redbrick);
+	else
+		return (core->textures.wood);
+
+}
+
 void	draw_wall_flat(t_core *core, int x)
 {
 	if (core->ray.face == 0)
@@ -103,10 +93,13 @@ void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
 	Uint32	*target_pixel;
 
-	target_pixel = (Uint32 *)((Uint8 *)surface->pixels
+	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
+	{
+		target_pixel = (Uint32 *)((Uint8 *)surface->pixels
 			+ y * surface->pitch
 			+ x * surface->format->BytesPerPixel);
 	*target_pixel = pixel;
+	}
 }
 
 Uint32	get_pixel(SDL_Surface *surface, int x, int y)
@@ -117,5 +110,4 @@ Uint32	get_pixel(SDL_Surface *surface, int x, int y)
 			+ y * surface->pitch
 			+ x * surface->format->BytesPerPixel);
 	return (*target_pixel);
-
 }

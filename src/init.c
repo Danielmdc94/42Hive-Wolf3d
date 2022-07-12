@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 20:00:21 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:23:24 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,19 @@ void	init_player(t_core *core)
 
 void	init_textures(t_core *core)
 {
-	core->textures.surface = SDL_LoadBMP("textures/wood.bmp");
-	if (!core->textures.surface)
+	core->textures.wood = SDL_LoadBMP("textures/wood.bmp");
+	if (!core->textures.wood)
 		error_print(core, "Error: Failed to load texture");
-	core->textures.wood = SDL_CreateTextureFromSurface(core->sdl.rend,
-			core->textures.surface);
-	core->textures.surface = SDL_LoadBMP("textures/greystone.bmp");
-	if (!core->textures.surface)
+	core->textures.greystone = SDL_LoadBMP("textures/greystone.bmp");
+	if (!core->textures.greystone)
 		error_print(core, "Error: Failed to load texture");
-	core->textures.greystone = SDL_CreateTextureFromSurface(core->sdl.rend,
-			core->textures.surface);
-	core->textures.surface = SDL_LoadBMP("textures/colorstone.bmp");
-	if (!core->textures.surface)
+	core->textures.colorstone = SDL_LoadBMP("textures/colorstone.bmp");
+	if (!core->textures.colorstone)
 		error_print(core, "Error: Failed to load texture");
-	core->textures.colorstone = SDL_CreateTextureFromSurface(core->sdl.rend,
-			core->textures.surface);
-	core->textures.surface = SDL_LoadBMP("textures/bluestone.bmp");
-	if (!core->textures.surface)
+	core->textures.bluestone = SDL_LoadBMP("textures/bluestone.bmp");
+	if (!core->textures.bluestone)
 		error_print(core, "Error: Failed to load texture");
-	core->textures.bluestone = SDL_CreateTextureFromSurface(core->sdl.rend,
-			core->textures.surface);
-	core->textures.surface = SDL_LoadBMP("textures/redbrick.bmp");
-	if (!core->textures.surface)
+	core->textures.redbrick = SDL_LoadBMP("textures/redbrick.bmp");
+	if (!core->textures.redbrick)
 		error_print(core, "Error: Failed to load texture");
-	core->textures.redbrick = SDL_CreateTextureFromSurface(core->sdl.rend,
-			core->textures.surface);
-	SDL_ConvertSurface(core->textures.surface, core->sdl.screen->format, 0);
 }

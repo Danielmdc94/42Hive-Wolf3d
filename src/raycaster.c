@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/08 16:08:36 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:45:42 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	raycaster(t_core *core)
 		calculate_distance(core);
 		draw_line(core, x);
 		//------DRAW RAYS MINIMAP
-		if (x)
+/*		if (x)
 		{
 			SDL_SetRenderDrawColor(core->sdl.rend, 0, 150, 0, 155);
 			SDL_RenderDrawLine(core->sdl.rend,
@@ -45,7 +45,7 @@ void	raycaster(t_core *core)
 				(core->player.pos.y * 10) + core->ray.dir.y
 				* core->ray.perp_wall_dis * 10);
 		}
-		//-----------------------
+*/		//-----------------------
 		x++;
 	}
 }
