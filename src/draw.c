@@ -6,12 +6,11 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 17:26:06 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:24:13 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
-
 
 void	draw_wall_textured(t_core *core, int x)
 {
@@ -29,33 +28,33 @@ void	draw_wall_textured(t_core *core, int x)
 	step = 1.0 * (core->textures.wood->h) / core->draw.height;
 	tex_pos = (core->draw.start - WIN_H / 2 + core->draw.height / 2) * step;
 	y = core->draw.start;
-	while (y < core->draw.end)
+	while (y++ <= core->draw.end)
 	{
 		tex_y = (int)tex_pos & (core->textures.wood->h - 1);
 		tex_pos += step;
 		set_pixel(core->sdl.screen, x, y,
 			get_pixel(choose_texture(core), tex_x, tex_y));
-		y++;
 	}
+	while (y++ <= WIN_H)
+		set_pixel(core->sdl.screen, x, y - 1, 0x5a6464);
 }
 
 SDL_Surface	*choose_texture(t_core *core)
 {
 	if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] == 1)
+		[(int)core->ray.map_pos.x] == 1)
 		return (core->textures.greystone);
 	else if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] == 2)
+		[(int)core->ray.map_pos.x] == 2)
 		return (core->textures.colorstone);
 	else if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] == 3)
+		[(int)core->ray.map_pos.x] == 3)
 		return (core->textures.bluestone);
 	else if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] == 4)
+		[(int)core->ray.map_pos.x] == 4)
 		return (core->textures.redbrick);
 	else
 		return (core->textures.wood);
-
 }
 
 void	draw_wall_flat(t_core *core, int x)
@@ -79,8 +78,8 @@ void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
 	{
 		target_pixel = (Uint32 *)((Uint8 *)surface->pixels
-			+ y * surface->pitch
-			+ x * surface->format->BytesPerPixel);
+				+ y * surface->pitch
+				+ x * surface->format->BytesPerPixel);
 	*target_pixel = pixel;
 	}
 }

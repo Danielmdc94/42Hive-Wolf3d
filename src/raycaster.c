@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 12:45:42 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:32:40 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,10 @@ static void	calculate_distance(t_core *core)
  */
 static void	draw_line(t_core *core, int x)
 {
-	core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
+	if (core->ray.perp_wall_dis > 0.1)
+		core->draw.height = (int)(WIN_H / core->ray.perp_wall_dis);
+	else
+		core->draw.height = 4 * WIN_H;
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 	core->draw.end = (core->draw.height) / 2 + WIN_H / 2;
 	if (core->ray.face == 0)
@@ -155,8 +158,4 @@ static void	draw_line(t_core *core, int x)
 		draw_wall_flat(core, x);
 	else
 		draw_wall_textured(core, x);
-
-	SDL_SetRenderDrawColor(core->sdl.rend, 90, 100, 100, 255);
-	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.end,
-		x, WIN_H - 1);
 }

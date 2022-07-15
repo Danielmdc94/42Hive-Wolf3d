@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 17:21:51 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/07/15 15:34:35 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	render_frame(t_core *core)
 	core->fps = 1.0f / elapsed;
 	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
 //-------
-	printf("%f\n", core->fps);
-	printf("%f\n", core->player.m_speed);
+//	printf("%f\n", core->fps);
+//	printf("%f\n", core->player.m_speed);
+	printf("%f\n", core->ray.perp_wall_dis);
 //-------
 
 }
