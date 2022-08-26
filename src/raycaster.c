@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/15 16:32:40 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:38:53 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,11 @@ static void	draw_line(t_core *core, int x)
 	core->draw.start = (-(core->draw.height)) / 2 + WIN_H / 2;
 	core->draw.end = (core->draw.height) / 2 + WIN_H / 2;
 	if (core->ray.face == 0)
-		core->ray.wall_x = core->player.pos.y + core->ray.perp_wall_dis * core->ray.dir.y;
+		core->ray.wall_x = core->player.pos.y + core->ray.perp_wall_dis
+			* core->ray.dir.y;
 	else
-		core->ray.wall_x = core->player.pos.x + core->ray.perp_wall_dis * core->ray.dir.x;
+		core->ray.wall_x = core->player.pos.x + core->ray.perp_wall_dis
+			* core->ray.dir.x;
 	core->ray.wall_x -= floor(core->ray.wall_x);
 	if (core->is_textured == 0)
 		draw_wall_flat(core, x);

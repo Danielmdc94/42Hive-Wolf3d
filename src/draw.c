@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/26 14:32:43 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:39:22 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,13 @@ void	draw_wall_flat(t_core *core, int x)
 	while (y <= core->draw.end)
 	{
 		if (core->ray.face == 0)
-			set_pixel(core->sdl.screen, x, y, 200);
+			set_pixel(core->sdl.screen, x, y, 0xc8c8c8);
 		else
-			set_pixel(core->sdl.screen, x, y, 150);
+			set_pixel(core->sdl.screen, x, y, 0x969696);
+		y++;
 	}
-	while (y++ <= WIN_H)
+	while (y++ < WIN_H)
 		set_pixel(core->sdl.screen, x, y - 1, 0x5a6464);
-	/*
-	if (core->ray.face == 0)
-		core->draw.color = 200;
-	else
-		core->draw.color = 150;
-	SDL_SetRenderDrawColor(core->sdl.rend,
-		core->draw.color - core->ray.perp_wall_dis * 5,
-		core->draw.color - core->ray.perp_wall_dis * 5,
-		core->draw.color - core->ray.perp_wall_dis * 5, 255);
-	SDL_RenderDrawLine(core->sdl.rend, x, core->draw.start,
-		x, core->draw.end);
-	*/
 }
 
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/15 16:00:20 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:31:15 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,20 @@ static void	move(t_core *core)
 				* core->player.m_speed + PLAYER_VOL)] == 0)
 			core->player.pos.x += core->player.dir.x * core->player.m_speed;
 		if (core->map.matrix[(int)(core->player.pos.y
-				+ core->player.dir.y * core->player.m_speed + PLAYER_VOL)]
+				+ core->player.dir.y * core->player.m_speed - PLAYER_VOL)]
 				[(int)(core->player.pos.x)] == 0)
 			core->player.pos.y += core->player.dir.y * core->player.m_speed;
 	}
 	if (core->sdl.event.key.keysym.sym == SDLK_s)
 	{
-		core->player.pos.x -= core->player.dir.x * core->player.m_speed;
-		core->player.pos.y -= core->player.dir.y * core->player.m_speed;
+		if (core->map.matrix[(int)(core->player.pos.y)]
+				[(int)(core->player.pos.x - core->player.dir.x
+				* core->player.m_speed + PLAYER_VOL)] == 0)
+			core->player.pos.x -= core->player.dir.x * core->player.m_speed;
+		if (core->map.matrix[(int)(core->player.pos.y
+				- core->player.dir.y * core->player.m_speed - PLAYER_VOL)]
+				[(int)(core->player.pos.x)] == 0)
+			core->player.pos.y -= core->player.dir.y * core->player.m_speed;
 	}
 }
 

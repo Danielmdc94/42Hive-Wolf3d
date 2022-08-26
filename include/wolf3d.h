@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/15 16:00:24 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:36:10 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define WIN_W 960
 # define WIN_H 640
 
-# define PLAYER_VOL 0.2
+# define PLAYER_VOL 0.3
 ////////STRUCTS
 
 /*-----2D VECTORS-----*/
@@ -134,28 +134,26 @@ typedef struct s_core
 	t_draw		draw;
 }				t_core;
 
-
-
 ////////FUNCTIONS
 
 /*--------MAIN--------*/
-void	exit_wolf3d(t_core *core);
-void	error_print(t_core *core, char *error_msg);
+void		exit_wolf3d(t_core *core);
+void		error_print(t_core *core, char *error_msg);
 
 /*--------INIT--------*/
-void	init(t_core *core);
-void	init_sdl(t_core *core);
-void	init_player(t_core *core);
-void	init_textures(t_core *core);
+void		init(t_core *core);
+void		init_sdl(t_core *core);
+void		init_player(t_core *core);
+void		init_textures(t_core *core);
 /*------READ MAP------*/
-void	read_map(t_core *core);
+void		read_map(t_core *core);
 
 /*-------RENDER-------*/
-void	render_frame(t_core *core);
-void	render_map(t_core *core);
+void		render_frame(t_core *core);
+void		render_map(t_core *core);
 
 /*------RAYCASTER-----*/
-void	raycaster(t_core *core);
+void		raycaster(t_core *core);
 
 /*---------DRAW-------*/
 void		draw_wall_textured(t_core *core, int x);
@@ -165,6 +163,6 @@ Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 SDL_Surface	*choose_texture(t_core *core);
 
 /*------CONTROLS------*/
-void	controls(t_core *core);
+void		controls(t_core *core);
 
 #endif
