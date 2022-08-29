@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/29 15:46:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:08:19 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	raycaster(t_thread *rend_thread)
 	int	x;
 
 	x = 240 * rend_thread->id;
-	while (x < 240 * (rend_thread->id + 1))
+//	if (rend_thread->id == 0)
+//	{
+	while (x < 120  * (rend_thread->id + 1))
 	{
 		ray_start(rend_thread->core, x);
 		calculate_step(rend_thread->core);
@@ -48,6 +50,7 @@ void	raycaster(t_thread *rend_thread)
 */		//-----------------------
 		x++;
 	}
+//	}
 }
 
 /* Takes the initial position and direction of the ray in the map, and

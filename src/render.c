@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/29 15:46:37 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:58:22 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,18 @@ void	render_frame(t_core *core)
 	core->player.m_speed = elapsed * 40.0;
 	core->player.r_speed = elapsed * 24.0;
 	core->fps = 1.0f / elapsed;
-	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
+//	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
 //-------
-//	printf("%f\n", core->fps);
+	printf("%f\n", core->fps);
 //	printf("%f\n", core->player.m_speed);
-	printf("%f\n", core->ray.perp_wall_dis);
+//	printf("%f\n", core->ray.perp_wall_dis);
 //-------
+}
+
+void	do_nothing(t_thread *rend_thread)
+{
+	ft_putnbr(rend_thread->id);
+	ft_putchar('\n');
 }
 
 void	open_threads(t_core *core)
@@ -55,7 +61,7 @@ void	open_threads(t_core *core)
 		error_print(core, "Error: Failed to create thread");
 		id++;
 	}
-	while (id <= 0)
+	while (id >= 0)
 	{
 		pthread_join(threads[id], NULL);
 		id--;
