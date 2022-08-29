@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/29 17:08:19 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:13:49 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	raycaster(t_thread *rend_thread)
 {
 	int	x;
 
-	x = 240 * rend_thread->id;
+	x = 240 * rend_thread->id;//x = 0;
 //	if (rend_thread->id == 0)
 //	{
-	while (x < 120  * (rend_thread->id + 1))
+	while (x < 120  * (rend_thread->id + 1))//while (x < WIN_W)
 	{
 		ray_start(rend_thread->core, x);
 		calculate_step(rend_thread->core);
