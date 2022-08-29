@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/26 15:38:53 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:46:48 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static void	draw_line(t_core *core, int x);
  * then draws a vertical line in the corresponding pixel column
  * depending on that distance to simulate a 3d environment.
  */
-void	raycaster(t_core *core)
+void	raycaster(t_thread *rend_thread)
 {
 	int	x;
 
-	x = 0;
-	while (x < WIN_W)
+	x = 240 * rend_thread->id;
+	while (x < 240 * (rend_thread->id + 1))
 	{
-		ray_start(core, x);
-		calculate_step(core);
-		calculate_distance(core);
-		draw_line(core, x);
+		ray_start(rend_thread->core, x);
+		calculate_step(rend_thread->core);
+		calculate_distance(rend_thread->core);
+		draw_line(rend_thread->core, x);
 		//------DRAW RAYS MINIMAP
 /*		if (x)
 		{

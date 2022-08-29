@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/26 15:36:56 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:46:37 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	render_frame(t_core *core)
 	start = SDL_GetPerformanceCounter();
 //	SDL_SetRenderDrawColor(core->sdl.rend, 25, 25, 25, 255);
 //	SDL_RenderClear(core->sdl.rend);
-	raycaster(core);
+	open_threads(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
 //	render_map(core);
 //	SDL_RenderPresent(core->sdl.rend);
@@ -37,6 +37,29 @@ void	render_frame(t_core *core)
 //	printf("%f\n", core->player.m_speed);
 	printf("%f\n", core->ray.perp_wall_dis);
 //-------
+}
+
+void	open_threads(t_core *core)
+{
+	pthread_t	threads[4];
+	t_thread	rend_thread[4];
+	int			id;
+
+	id = 0;
+	while (id < 4)
+	{
+		rend_thread[id].id = id;
+		rend_thread[id].core = core;
+		if (pthread_create(&threads[id], NULL, (void *)raycaster,
+				(void *)&rend_thread[id]) != 0)
+		error_print(core, "Error: Failed to create thread");
+		id++;
+	}
+	while (id <= 0)
+	{
+		pthread_join(threads[id], NULL);
+		id--;
+	}
 }
 
 //Testing minimap

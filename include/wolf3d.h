@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/26 15:36:10 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:38:59 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <time.h>
+# include <pthread.h>
 
 ////////DEFINITIONS
 
@@ -134,6 +135,14 @@ typedef struct s_core
 	t_draw		draw;
 }				t_core;
 
+/*-------THREAD-------*/
+typedef struct s_thread
+{
+	t_core	*core;
+	int		id;
+}				t_thread;
+
+
 ////////FUNCTIONS
 
 /*--------MAIN--------*/
@@ -151,9 +160,10 @@ void		read_map(t_core *core);
 /*-------RENDER-------*/
 void		render_frame(t_core *core);
 void		render_map(t_core *core);
+void		open_threads(t_core *core);
 
 /*------RAYCASTER-----*/
-void		raycaster(t_core *core);
+void		raycaster(t_thread *rend_thread);
 
 /*---------DRAW-------*/
 void		draw_wall_textured(t_core *core, int x);
