@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/29 16:58:22 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/02 15:07:14 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	render_frame(t_core *core)
 	Uint64	end;
 	float	elapsed;
 
-	SDL_FillRect(core->sdl.screen, NULL, 0x000000);
+	clear_screen(core->sdl.screen);
+//	SDL_FillRect(core->sdl.screen, NULL, 0x000000);
 	start = SDL_GetPerformanceCounter();
 //	SDL_SetRenderDrawColor(core->sdl.rend, 25, 25, 25, 255);
 //	SDL_RenderClear(core->sdl.rend);
-	open_threads(core);
+//	open_threads(core);
+	raycaster(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
 //	render_map(core);
 //	SDL_RenderPresent(core->sdl.rend);
@@ -39,6 +41,37 @@ void	render_frame(t_core *core)
 //-------
 }
 
+void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+{
+	Uint32	*target_pixel;
+
+	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
+	{
+		target_pixel = (Uint32 *)((Uint8 *)surface->pixels
+				+ y * surface->pitch
+				+ x * surface->format->BytesPerPixel);
+	*target_pixel = pixel;
+	}
+}
+
+Uint32	get_pixel(SDL_Surface *surface, int x, int y)
+{
+	Uint32	*target_pixel;
+
+	target_pixel = (Uint32 *)((Uint8 *)surface->pixels
+			+ y * surface->pitch
+			+ x * surface->format->BytesPerPixel);
+	return (*target_pixel);
+}
+
+void	clear_screen(SDL_Surface *surface)
+{
+	size_t	len;
+
+	len = surface->w * surface->h * surface->format->BytesPerPixel;
+	ft_memset(surface->pixels, 0, len);
+}
+/*
 void	do_nothing(t_thread *rend_thread)
 {
 	ft_putnbr(rend_thread->id);
@@ -67,9 +100,10 @@ void	open_threads(t_core *core)
 		id--;
 	}
 }
+*/
 
 //Testing minimap
-void	render_map(t_core *core)
+/*void	render_map(t_core *core)
 {
 	SDL_Rect	minimap;
 	SDL_Rect	wall;
@@ -114,4 +148,4 @@ void	render_map(t_core *core)
 		minimap.y + (int)(core->player.pos.y * 10),
 		minimap.x + (int)(core->player.pos.x * 10) + core->player.dir.x * 6,
 		minimap.y + (int)(core->player.pos.y * 10) + core->player.dir.y * 8);
-}
+}*/
