@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/02 15:10:44 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/02 15:46:38 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ typedef struct s_thread
 	int		id;
 }				t_thread;
 
-
 ////////FUNCTIONS
 
 /*--------MAIN--------*/
@@ -162,9 +161,7 @@ void		read_map(t_core *core);
 void		render_frame(t_core *core);
 void		set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
-void		clear_screen(SDL_Surface *surface);
-//void		render_map(t_core *core);
-//void		open_threads(t_core *core);
+void		clear_window(SDL_Surface *surface);
 
 /*------RAYCASTER-----*/
 void		raycaster(t_core *core);

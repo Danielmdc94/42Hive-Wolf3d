@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/12 15:19:01 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/02 15:49:56 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@ void	init_sdl(t_core *core)
 	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!core->sdl.win)
 		error_print(core, "Error: Failed to create window");
-	core->sdl.rend = SDL_CreateRenderer(core->sdl.win,
-			SDL_RENDERER_SOFTWARE, 0);
 	core->sdl.screen = SDL_GetWindowSurface(core->sdl.win);
-	if (!core->sdl.rend)
-		error_print(core, "Error: Failed to create renderer");
 }
 
 void	init_player(t_core *core)
