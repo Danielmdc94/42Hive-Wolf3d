@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 15:07:51 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:44:48 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 /*--------FONT--------*/
 # define FONT_SIZE 24
-
+# define FPS_SIZE 20
 ////////STRUCTS
 
 /*-----2D VECTORS-----*/
@@ -62,16 +62,15 @@ typedef struct s_map
 	int			height;
 }				t_map;
 
-
 /*--------TEXT--------*/
 typedef struct s_text
 {
 	TTF_Font		*font;
 	SDL_Color		color;
-	SDL_Surface		surface;
+	SDL_Surface		*surface;
+	char			*str;
 }					t_text;
 
-	char			*str;
 /*--------SDL---------*/
 typedef struct s_sdl
 {
@@ -176,6 +175,7 @@ void		render_frame(t_core *core);
 void		set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 void		clear_window(SDL_Surface *surface);
+void		display_ui(t_core *core);
 
 /*------RAYCASTER-----*/
 void		raycaster(t_core *core);

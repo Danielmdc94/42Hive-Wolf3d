@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 15:14:24 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:42:44 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	init_sdl(t_core *core)
 		error_print(core, "Error: Failed to initialize SDL2");
 	if (TTF_Init() != 0)
 		error_print(core, "Error: Failed to initialize SDL2_ttf");
-	core->sdl.text.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf", FONT_SIZE);
+	core->sdl.text.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf",
+			FPS_SIZE);
 	if (core->sdl.text.font == NULL)
 		error_print(core, "Error: Failed to load text font");
 	core->sdl.text.color.r = 255;
 	core->sdl.text.color.g = 255;
 	core->sdl.text.color.b = 255;
 	core->sdl.text.color.a = 255;
-	core->sdl.text.surface = *TTF_RenderText_Solid(core->sdl.text.font,
-			"Welcome to WOLF3D", core->sdl.text.color);
+	core->fps = 100000000000;
 	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!core->sdl.win)
 		error_print(core, "Error: Failed to create window");
@@ -45,8 +45,8 @@ void	init_sdl(t_core *core)
 
 void	init_player(t_core *core)
 {
-	core->player.pos.x = 2;
-	core->player.pos.y = 4;
+	core->player.pos.x = 2.5;
+	core->player.pos.y = 4.5;
 	core->player.dir.x = 1;
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;

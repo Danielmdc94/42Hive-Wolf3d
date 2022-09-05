@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 15:16:14 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:44:39 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_frame(t_core *core)
 	clear_window(core->sdl.screen);
 	start = SDL_GetPerformanceCounter();
 	raycaster(core);
-	SDL_BlitSurface(&core->sdl.text.surface, NULL, core->sdl.screen, &core->sdl.screen->clip_rect);
+	display_ui(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
 	end = SDL_GetPerformanceCounter();
 	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
@@ -65,4 +65,18 @@ void	clear_window(SDL_Surface *surface)
 
 	len = surface->w * surface->h * surface->format->BytesPerPixel;
 	ft_memset(surface->pixels, 0, len);
+}
+
+void	display_ui(t_core *core)
+{
+	SDL_Surface	*fps_surface;
+	char		*fps_text;
+
+	fps_text = ft_itoa(core->fps);
+	fps_surface = TTF_RenderText_Solid(core->sdl.text.font,
+		fps_text, core->sdl.text.color);
+	SDL_BlitSurface(fps_surface, NULL, core->sdl.screen,
+		&core->sdl.screen->clip_rect);
+	free(fps_text);
+	SDL_FreeSurface(fps_surface);
 }
