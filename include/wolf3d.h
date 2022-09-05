@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 13:51:26 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:07:51 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_text
 	TTF_Font		*font;
 	SDL_Color		color;
 	SDL_Surface		surface;
-}					t_text
+}					t_text;
 
 	char			*str;
 /*--------SDL---------*/
@@ -80,6 +80,7 @@ typedef struct s_sdl
 	Uint32			*pixels;
 	SDL_Renderer	*rend;
 	SDL_Event		event;
+	t_text			text;
 }					t_sdl;
 
 /*------TEXTURES------*/

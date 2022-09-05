@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 13:51:33 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:14:24 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ void	init_sdl(t_core *core)
 		error_print(core, "Error: Failed to initialize SDL2");
 	if (TTF_Init() != 0)
 		error_print(core, "Error: Failed to initialize SDL2_ttf");
-	core->sdl.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf", FONT_SIZE);
-	if (core->sdl.font == NULL)
+	core->sdl.text.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf", FONT_SIZE);
+	if (core->sdl.text.font == NULL)
 		error_print(core, "Error: Failed to load text font");
+	core->sdl.text.color.r = 255;
+	core->sdl.text.color.g = 255;
+	core->sdl.text.color.b = 255;
+	core->sdl.text.color.a = 255;
+	core->sdl.text.surface = *TTF_RenderText_Solid(core->sdl.text.font,
+			"Welcome to WOLF3D", core->sdl.text.color);
 	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!core->sdl.win)
 		error_print(core, "Error: Failed to create window");
