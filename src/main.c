@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/07/15 16:34:10 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 12:49:53 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	exit_wolf3d(t_core *core)
 	}
 	if (core->sdl.win)
 		SDL_DestroyWindow(core->sdl.win);
-	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/02 15:49:56 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:34:27 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	init_sdl(t_core *core)
 		error_print(core, "Error: Failed to initialize SDL2");
 	if (TTF_Init() != 0)
 		error_print(core, "Error: Failed to initialize SDL2_ttf");
+	core->sdl.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf", FONT_SIZE);
+	if (core->sdl.font == NULL)
+		error_print(core, "Error: Failed to load text font");
 	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!core->sdl.win)
 		error_print(core, "Error: Failed to create window");

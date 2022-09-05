@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/02 15:46:49 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:36:01 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	render_frame(t_core *core)
 	clear_window(core->sdl.screen);
 	start = SDL_GetPerformanceCounter();
 	raycaster(core);
+	SDL_Color	color = { 255, 255, 255, 255 };
+	SDL_Surface	*surface = TTF_RenderText_Solid(core->sdl.font, "Welcome to WOLF3D", color);
+		SDL_BlitSurface(surface, NULL, core->sdl.screen, &surface->clip_rect);
 	SDL_UpdateWindowSurface(core->sdl.win);
 	end = SDL_GetPerformanceCounter();
 	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
@@ -29,7 +32,7 @@ void	render_frame(t_core *core)
 	core->fps = 1.0f / elapsed;
 //	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
 //-------
-//	printf("%f\n", core->fps);
+	printf("%f\n", core->fps);
 //	printf("%f\n", core->player.m_speed);
 //	printf("%f\n", core->ray.perp_wall_dis);
 //-------
