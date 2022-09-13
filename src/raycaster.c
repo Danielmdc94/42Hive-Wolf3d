@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/13 13:39:02 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:11:00 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,32 @@ static void	floor_casting(t_core *core)
 	int		curr_pos;
 	double	z;
 	double	row_dis;
+	t_floor	floor;
 
 	y = WIN_H / 2;
 
 	while (y < WIN_H)
 	{
-		core->floor.ray_dir0.x = core->player.dir.x - core->player.plane.x;
-		core->floor.ray_dir0.y = core->player.dir.y - core->player.plane.y;
-		core->floor.ray_dir1.x = core->player.dir.x + core->player.plane.x;
-		core->floor.ray_dir1.y = core->player.dir.y + core->player.plane.y;
+		floor.ray_dir0.x = core->player.dir.x - core->player.plane.x;
+		floor.ray_dir0.y = core->player.dir.y - core->player.plane.y;
+		floor.ray_dir1.x = core->player.dir.x + core->player.plane.x;
+		floor.ray_dir1.y = core->player.dir.y + core->player.plane.y;
 		curr_pos = y - WIN_H / 2;
 		z = 0.5 * WIN_H;
 		row_dis = z / curr_pos;
-		core->floor.step.x = row_dis * (core->floor.ray_dir1.x - core->floor.ray_dir0.x) / WIN_W;
-		core->floor.step.y = row_dis * (core->floor.ray_dir1.y - core->floor.ray_dir0.y) / WIN_W;
-		core->floor.curr.x = core->player.pos.x + row_dis * core->floor.ray_dir0.x;
-		core->floor.curr.y = core->player.pos.y + row_dis * core->floor.ray_dir0.y;
+		floor.step.x = row_dis * (floor.ray_dir1.x - floor.ray_dir0.x) / WIN_W;
+		floor.step.y = row_dis * (floor.ray_dir1.y - floor.ray_dir0.y) / WIN_W;
+		floor.curr.x = core->player.pos.x + row_dis * floor.ray_dir0.x;
+		floor.curr.y = core->player.pos.y + row_dis * floor.ray_dir0.y;
 		while (x < WIN_W)
 		{
-			core->floor.cell.x = (int)(core->floor.curr.x);
-			core->floor.cell.y = (int)(core->floor.curr.y);
-			core->floor.tex_x = (int)(core->textures.wood->w * (core->floor.curr.x - core->floor.cell.x)) & (core->textures.wood->w - 1);
-			core->floor.tex_y = (int)(core->textures.wood->h * (core->floor.curr.y - core->floor.cell.y)) & (core->textures.wood->h - 1);
-			core->floor.curr.x += core->floor.step.x;
-			core->floor.curr.y += core->floor.step.y;
-			set_pixel(core->sdl.screen, x, y, get_pixel(core->textures.greystone, core->floor.tex_x, core->floor.tex_y));
+			floor.cell.x = (int)(floor.curr.x);
+			floor.cell.y = (int)(floor.curr.y);
+			floor.tex_x = (int)(core->textures.wood->w * (floor.curr.x - floor.cell.x)) & (core->textures.wood->w - 1);
+			floor.tex_y = (int)(core->textures.wood->h * (floor.curr.y - floor.cell.y)) & (core->textures.wood->h - 1);
+			floor.curr.x += floor.step.x;
+			floor.curr.y += floor.step.y;
+			set_pixel(core->sdl.screen, x, y, get_pixel(core->textures.greystone, floor.tex_x, floor.tex_y));
 			x++;
 		}
 		x = 0;
