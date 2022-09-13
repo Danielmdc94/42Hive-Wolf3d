@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/13 15:08:43 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:20:52 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	draw_wall_textured(t_core *core, int x)
 	{
 		tex_y = (int)tex_pos & (core->textures.wood->h - 1);
 		tex_pos += step;
-//		if (core->ray.face == 0)
+		if (core->ray.face == 0)
 			set_pixel(core->sdl.screen, x, y,
 				get_pixel(choose_texture(core), tex_x, tex_y));
-//		else
-//			set_pixel(core->sdl.screen, x, y,
-//				get_pixel(choose_texture(core), tex_x, tex_y) >> 1);
+		else
+			set_pixel(core->sdl.screen, x, y,
+				get_pixel(choose_texture(core), tex_x, tex_y) >> 1 & 0x7F7F7F);
 
 	}
 //	while (y++ <= WIN_H)

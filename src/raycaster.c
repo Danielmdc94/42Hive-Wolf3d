@@ -6,13 +6,13 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/13 15:11:00 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:17:16 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-static void	floor_casting(t_core *core);
+//static void	floor_casting(t_core *core);
 static void	ray_start(t_core *core, int x);
 static void	calculate_step(t_core *core);
 static void	calculate_distance(t_core *core);
@@ -27,7 +27,7 @@ void	raycaster(t_core *core)
 {
 	int	x;
 
-	floor_casting(core);
+//	floor_casting(core);
 	x = 0;
 	while (x < WIN_W)
 	{
@@ -38,7 +38,7 @@ void	raycaster(t_core *core)
 		x++;
 	}
 }
-
+/*
 static void	floor_casting(t_core *core)
 {
 	int		y;
@@ -78,7 +78,7 @@ static void	floor_casting(t_core *core)
 		y++;
 	}
 }
-
+*/
 /* Takes the initial position and direction of the ray in the map, and
  * the square it belongs to, then calculates the distance when the ray
  * crosses over to the next square in both, x and y, axis.
