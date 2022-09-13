@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 18:44:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:34:30 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include "get_next_line.h"
 # include <math.h>
 # include <fcntl.h>
-# include <time.h>
-# include <pthread.h>
 
 ////////DEFINITIONS
 
@@ -77,7 +75,6 @@ typedef struct s_sdl
 	SDL_Window		*win;
 	SDL_Surface		*screen;
 	Uint32			*pixels;
-	SDL_Renderer	*rend;
 	SDL_Event		event;
 	t_text			text;
 }					t_sdl;
@@ -117,6 +114,19 @@ typedef struct ray
 	double		wall_x;
 }				t_ray;
 
+typedef struct floor
+{
+	t_vector2	ray_dir0;
+	t_vector2	ray_dir1;
+	t_vector2	step;
+	t_vector2	curr;
+	t_vector2	cell;
+	double		curr_pos;
+	double		row_dis;
+	int			tex_x;
+	int			tex_y;
+}				t_floor;
+
 /*--------TEMP-------*/
 typedef struct s_temp
 {
@@ -145,16 +155,10 @@ typedef struct s_core
 	t_player	player;
 	t_frames	frames;
 	t_ray		ray;
+	t_floor		floor;
 	t_temp		temp;
 	t_draw		draw;
 }				t_core;
-
-/*-------THREAD-------*/
-typedef struct s_thread
-{
-	t_core	*core;
-	int		id;
-}				t_thread;
 
 ////////FUNCTIONS
 
