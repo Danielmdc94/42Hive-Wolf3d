@@ -6,12 +6,13 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/02 15:44:53 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:53:05 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
+static void	floor_casting(t_core *core);
 static void	ray_start(t_core *core, int x);
 static void	calculate_step(t_core *core);
 static void	calculate_distance(t_core *core);
@@ -26,6 +27,7 @@ void	raycaster(t_core *core)
 {
 	int	x;
 
+	floor_casting(core);
 	x = 0;
 	while (x < WIN_W)
 	{
@@ -36,6 +38,41 @@ void	raycaster(t_core *core)
 		x++;
 	}
 }
+
+static void	floor_casting(t_core *core)
+{
+	int y = WIN_H / 2;
+	int x = 0;
+
+	while (y < WIN_H)
+	{
+		float ray_dir_x0 = core->player.dir.x - core->player.plane.x;
+		float ray_dir_y0 = core->player.dir.y - core->player.plane.y;
+		float ray_dir_x1 = core->player.dir.x + core->player.plane.x;
+		float ray_dir_y1 = core->player.dir.y + core->player.plane.y;
+		int p = y - WIN_H / 2;
+		float pos_z = 0.5 * WIN_H;
+		float row_dis = pos_z / p;
+		float floor_step_x = row_dis * (ray_dir_x1 - ray_dir_x0) / WIN_W;
+		float floor_step_y = row_dis * (ray_dir_y1 - ray_dir_y0) / WIN_W;
+		float floor_x = core->player.pos.x + row_dis * ray_dir_x0;
+		float floor_y = core->player.pos.y + row_dis * ray_dir_y0;
+		while (x < WIN_W)
+		{
+			int cell_x = (int)(floor_x);
+			int cell_y = (int)(floor_y);
+			int tex_x = (int)(core->textures.wood->w * (floor_x - cell_x)) & (core->textures.wood->w - 1);
+			int tex_y = (int)(core->textures.wood->h * (floor_y - cell_y)) & (core->textures.wood->h - 1);
+			floor_x += floor_step_x;
+			floor_y += floor_step_y;
+			set_pixel(core->sdl.screen, x, y, get_pixel(core->textures.greystone, tex_x, tex_y));
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
 
 /* Takes the initial position and direction of the ray in the map, and
  * the square it belongs to, then calculates the distance when the ray
