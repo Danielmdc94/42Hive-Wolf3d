@@ -6,15 +6,15 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 13:41:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:18:53 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-static void	ray_start(t_core *core, int x);
 static void	calculate_step(t_core *core);
 static void	calculate_distance(t_core *core);
+static int	ray_hit(t_core *core);
 static void	draw_line(t_core *core, int x);
 
 /* Creates a ray per pixel column in the screen, shot from the player,
@@ -29,35 +29,26 @@ void	wall_casting(t_core *core)
 	x = 0;
 	while (x < WIN_W)
 	{
-		ray_start(core, x);
+		core->ray.camera_x = 2 * (double)x / (double)WIN_W - 1;
+		core->ray.dir.x = core->player.dir.x + core->player.plane.x
+			* core->ray.camera_x;
+		core->ray.dir.y = core->player.dir.y + core->player.plane.y
+			* core->ray.camera_x;
+		core->ray.map_pos.x = (int)core->player.pos.x;
+		core->ray.map_pos.y = (int)core->player.pos.y;
+		if (core->ray.dir.x == 0)
+			core->ray.delta_dis.x = pow(1, 30);
+		else
+			core->ray.delta_dis.x = fabs(1 / core->ray.dir.x);
+		if (core->ray.dir.y == 0)
+			core->ray.delta_dis.y = pow(1, 30);
+		else
+			core->ray.delta_dis.y = fabs(1 / core->ray.dir.y);
 		calculate_step(core);
 		calculate_distance(core);
 		draw_line(core, x);
 		x++;
 	}
-}
-
-/* Takes the initial position and direction of the ray in the map, and
- * the square it belongs to, then calculates the distance when the ray
- * crosses over to the next square in both, x and y, axis.
- */
-static void	ray_start(t_core *core, int x)
-{
-	core->ray.camera_x = 2 * (double)x / (double)WIN_W - 1;
-	core->ray.dir.x = core->player.dir.x + core->player.plane.x
-		* core->ray.camera_x;
-	core->ray.dir.y = core->player.dir.y + core->player.plane.y
-		* core->ray.camera_x;
-	core->ray.map_pos.x = (int)core->player.pos.x;
-	core->ray.map_pos.y = (int)core->player.pos.y;
-	if (core->ray.dir.x == 0)
-		core->ray.delta_dis.x = pow(1, 30);
-	else
-		core->ray.delta_dis.x = fabs(1 / core->ray.dir.x);
-	if (core->ray.dir.y == 0)
-		core->ray.delta_dis.y = pow(1, 30);
-	else
-		core->ray.delta_dis.y = fabs(1 / core->ray.dir.y);
 }
 
 /* Calculates in which direction the ray will step forward
@@ -112,9 +103,8 @@ static void	calculate_distance(t_core *core)
 			core->ray.map_pos.y += core->ray.step.y;
 			core->ray.face = 1;
 		}
-		if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] > 0)
-			core->ray.hit = 1;
+		core->ray.hit = ray_hit(core);
+		
 	}
 	if (core->ray.face == 0)
 		core->ray.perp_wall_dis = core->ray.side_dis.x
@@ -124,6 +114,23 @@ static void	calculate_distance(t_core *core)
 			- core->ray.delta_dis.y;
 }
 
+/*Checks wheter the ray hits a wall. If the ray tries to reach outside of
+ * the map it turns off the textures to avoid a segfault
+ */
+static int	ray_hit(t_core *core)
+{
+	if (core->ray.map_pos.y < 0 || core->ray.map_pos.y >= core->map.height
+			|| core->ray.map_pos.x < 0 || core->ray.map_pos.x >= core->map. width)
+	{
+		core->is_textured = 0;
+		return (1);
+	}
+	else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] > 0)
+		return (1);
+	else
+		return (0);
+}
 /* Sets, depending on the distance to the wall, the height of the wall
  * on screen and what x coordinate of said wall was hit. Then calls a
  * function to dray this line with textures or flat colors.

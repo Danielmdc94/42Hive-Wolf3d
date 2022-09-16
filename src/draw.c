@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 13:32:56 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:28:42 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,51 @@ void	draw_wall_textured(t_core *core, int x)
 		else
 			set_pixel(core->sdl.screen, x, y,
 				get_pixel(choose_texture(core), tex_x, tex_y) >> 1 & 0x7F7F7F);
-
 	}
-//	while (y++ <= WIN_H)
-//		set_pixel(core->sdl.screen, x, y - 1, 0x5a6464);
 }
 
 SDL_Surface	*choose_texture(t_core *core)
 {
-	if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 1)
-		return (core->textures.greystone);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 2)
-		return (core->textures.colorstone);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 3)
-		return (core->textures.bluestone);
-	else if (core->map.matrix[(int)core->ray.map_pos.y]
-		[(int)core->ray.map_pos.x] == 4)
-		return (core->textures.redbrick);
+	if (core->is_textured == 1)
+	{
+		if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 1)
+			return (core->textures.greystone);
+		else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 2)
+			return (core->textures.colorstone);
+		else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 3)
+			return (core->textures.bluestone);
+		else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 4)
+			return (core->textures.redbrick);
+		else
+			return (core->textures.wood);
+	}
 	else
-		return (core->textures.wood);
+	{
+		if (core->ray.face == 0 && core->ray.dir.x > 0)
+			return (core->textures.colorstone);
+		else if (core->ray.face == 0 && core->ray.dir.x < 0)
+			return (core->textures.bluestone);
+		else if (core->ray.face == 1 && core->ray.dir.y > 0)
+			return (core->textures.redbrick);
+		else
+			return (core->textures.wood);
+	}
 }
 
 void	draw_wall_flat(t_core *core, int x)
 {
 	int	y;
 
-	y = core->draw.start;
+	y = 0;
+	while (y <= core->draw.start)
+	{
+		set_pixel(core->sdl.screen, x, y, 0x87ceeb);
+		y++;
+	}
 	while (y <= core->draw.end)
 	{
 		if (core->ray.face == 0)

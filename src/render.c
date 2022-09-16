@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 13:33:59 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:26:47 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void	render_frame(t_core *core)
 
 	clear_window(core->sdl.screen);
 	start = SDL_GetPerformanceCounter();
-	floor_casting(core);
+	if (core->is_textured == 1)
+		floor_casting(core);
 	wall_casting(core);
 	display_ui(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
 	end = SDL_GetPerformanceCounter();
 	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
-	core->player.m_speed = elapsed * 40.0;
-	core->player.r_speed = elapsed * 24.0;
 	core->fps = 1.0f / elapsed;
 //	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
 //-------

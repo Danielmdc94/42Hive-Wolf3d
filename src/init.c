@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 18:42:44 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:51:19 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,21 @@ void	init(t_core *core)
 	init_textures(core);
 	init_player(core);
 	core->is_runing = 1;
-	core->is_textured = 1;
+	core->is_textured = 2;
 }
 
 void	init_sdl(t_core *core)
 {
+	SDL_AudioSpec	wav_spec;
+	Uint32			wav_length;
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)
 		error_print(core, "Error: Failed to initialize SDL2");
+	SDL_LoadWAV("./sounds/05_-_Wolfenstein_3D_-_DOS_-_P.O.W..wav",
+			&wav_spec, &core->sdl.wav_buffer, &wav_length);
+	core->sdl.device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+	SDL_PauseAudioDevice(core->sdl.device_id, 0);
 	if (TTF_Init() != 0)
 		error_print(core, "Error: Failed to initialize SDL2_ttf");
 	core->sdl.text.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf",
@@ -36,7 +44,6 @@ void	init_sdl(t_core *core)
 	core->sdl.text.color.g = 255;
 	core->sdl.text.color.b = 255;
 	core->sdl.text.color.a = 255;
-	core->fps = 100000000000;
 	core->sdl.win = SDL_CreateWindow("Wolf3d", 0, 0, WIN_W, WIN_H, 0);
 	if (!core->sdl.win)
 		error_print(core, "Error: Failed to create window");
@@ -51,6 +58,8 @@ void	init_player(t_core *core)
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;
 	core->player.plane.y = 0.66;
+	core->player.m_speed = 1.2;
+	core->player.r_speed = 0.6;
 }
 
 void	init_textures(t_core *core)

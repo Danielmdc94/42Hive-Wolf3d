@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 13:35:39 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:50:22 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,14 @@ typedef struct s_text
 /*--------SDL---------*/
 typedef struct s_sdl
 {
-	SDL_Window		*win;
-	SDL_Surface		*screen;
-	Uint32			*pixels;
-	SDL_Event		event;
-	t_text			text;
-}					t_sdl;
+	SDL_Window			*win;
+	SDL_Surface			*screen;
+	Uint32				*pixels;
+	SDL_Event			event;
+	t_text				text;
+	SDL_AudioDeviceID	device_id;
+	Uint8				*wav_buffer;
+}						t_sdl;
 
 /*------TEXTURES------*/
 typedef struct textures

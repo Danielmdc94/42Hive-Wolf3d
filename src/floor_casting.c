@@ -6,13 +6,12 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:36:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 14:48:41 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:42:52 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-static void	ray_range(t_core *core, t_floor*floor);
 static void	draw_row(t_core *core, t_floor *floor, int y);
 
 void	floor_casting(t_core *core)
@@ -22,10 +21,13 @@ void	floor_casting(t_core *core)
 	double	row_dis;
 	t_floor	floor;
 
+	floor.ray_dir0.x = core->player.dir.x - core->player.plane.x;
+	floor.ray_dir0.y = core->player.dir.y - core->player.plane.y;
+	floor.ray_dir1.x = core->player.dir.x + core->player.plane.x;
+	floor.ray_dir1.y = core->player.dir.y + core->player.plane.y;
 	y = WIN_H / 2;
 	while (y < WIN_H)
 	{
-		ray_range(core, &floor);
 		curr_pos = y - WIN_H / 2;
 		row_dis = (0.5 * WIN_H) / curr_pos;
 		floor.step.x = row_dis * (floor.ray_dir1.x - floor.ray_dir0.x) / WIN_W;
@@ -35,14 +37,6 @@ void	floor_casting(t_core *core)
 		draw_row(core, &floor, y);
 		y++;
 	}
-}
-
-static void	ray_range(t_core *core, t_floor*floor)
-{
-		floor->ray_dir0.x = core->player.dir.x - core->player.plane.x;
-		floor->ray_dir0.y = core->player.dir.y - core->player.plane.y;
-		floor->ray_dir1.x = core->player.dir.x + core->player.plane.x;
-		floor->ray_dir1.y = core->player.dir.y + core->player.plane.y;
 }
 
 static void	draw_row(t_core *core, t_floor *floor, int y)

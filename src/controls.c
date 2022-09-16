@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/08/26 15:31:15 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:53:14 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	on_keydown(t_core *core)
 	if (core->sdl.event.key.keysym.sym == SDLK_t && core->is_textured == 0)
 		core->is_textured = 1;
 	else if (core->sdl.event.key.keysym.sym == SDLK_t && core->is_textured == 1)
+		core->is_textured = 2;
+	else if (core->sdl.event.key.keysym.sym == SDLK_t && core->is_textured == 2)
 		core->is_textured = 0;
 }
 
