@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 18:18:11 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:49:05 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	init_player(t_core *core)
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;
 	core->player.plane.y = 0.66;
-	core->player.m_speed = 1.2;
-	core->player.r_speed = 0.6;
+	core->player.m_speed = 0.4;
+	core->player.r_speed = 0.2;
 }
 
 void	init_textures(t_core *core)
