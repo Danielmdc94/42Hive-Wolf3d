@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/13 13:34:30 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:35:39 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,8 @@ void		clear_window(SDL_Surface *surface);
 void		display_ui(t_core *core);
 
 /*------RAYCASTER-----*/
-void		raycaster(t_core *core);
+void		wall_casting(t_core *core);
+void		floor_casting(t_core *core);
 
 /*---------DRAW-------*/
 void		draw_wall_textured(t_core *core, int x);

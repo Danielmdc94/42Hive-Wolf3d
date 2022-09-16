@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/08/29 15:42:46 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/09/16 13:41:19 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,9 @@ SRC_LIST = \
 	read_map.c \
 	render.c \
 	raycaster.c \
+	floor_casting.c \
 	draw.c \
-	controls.c 
+	controls.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

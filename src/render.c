@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/05 18:44:39 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:33:59 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	render_frame(t_core *core)
 
 	clear_window(core->sdl.screen);
 	start = SDL_GetPerformanceCounter();
-	raycaster(core);
+	floor_casting(core);
+	wall_casting(core);
 	display_ui(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
 	end = SDL_GetPerformanceCounter();
