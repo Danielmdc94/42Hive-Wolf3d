@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 17:50:22 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:32:58 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/include/libft.h"
 # include "../SDL/SDL2.framework/Versions/A/Headers/SDL.h"
-# include "../SDL/SDL2_image.framework/Versions/A/Headers/SDL_image.h"
 # include "../SDL/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h"
 # include "get_next_line.h"
 # include <math.h>
@@ -190,7 +189,6 @@ void		floor_casting(t_core *core);
 /*---------DRAW-------*/
 void		draw_wall_textured(t_core *core, int x);
 void		draw_wall_flat(t_core *core, int x);
-SDL_Surface	*choose_texture(t_core *core);
 
 /*------CONTROLS------*/
 void		controls(t_core *core);

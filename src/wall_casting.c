@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 17:18:53 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:19:27 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static void	calculate_distance(t_core *core)
 			core->ray.face = 1;
 		}
 		core->ray.hit = ray_hit(core);
-		
 	}
 	if (core->ray.face == 0)
 		core->ray.perp_wall_dis = core->ray.side_dis.x
@@ -120,17 +119,18 @@ static void	calculate_distance(t_core *core)
 static int	ray_hit(t_core *core)
 {
 	if (core->ray.map_pos.y < 0 || core->ray.map_pos.y >= core->map.height
-			|| core->ray.map_pos.x < 0 || core->ray.map_pos.x >= core->map. width)
+		|| core->ray.map_pos.x < 0 || core->ray.map_pos.x >= core->map. width)
 	{
 		core->is_textured = 0;
 		return (1);
 	}
 	else if (core->map.matrix[(int)core->ray.map_pos.y]
-			[(int)core->ray.map_pos.x] > 0)
+		[(int)core->ray.map_pos.x] > 0)
 		return (1);
 	else
 		return (0);
 }
+
 /* Sets, depending on the distance to the wall, the height of the wall
  * on screen and what x coordinate of said wall was hit. Then calls a
  * function to dray this line with textures or flat colors.

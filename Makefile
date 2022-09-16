@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/09/16 13:41:19 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/09/16 18:46:22 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,13 @@ SDL_DIR = ./SDL/
 SDL_HEADERS = \
 	-I$(SDL_DIR)SDL2.framework/Versions/A/Headers \
 	-I$(SDL_DIR)SDL2_ttf.framework/Versions/A/Headers \
-	-I$(SDL_DIR)SDL2_image.framework/Versions/A/Headers \
-	-I$(SDL_DIR)SDL2_mixer.framework/Headers
 
 LIBS = -L$(LIBFT_DIR) -lft
 
 FRAMEWORKS = -F$(SDL_DIR) \
 				-rpath $(SDL_DIR) \
 				-framework OpenGL -framework AppKit -framework OpenCl \
-				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
-				-framework SDL2_mixer \
-				-D_THREAD_SAFE
+				-framework SDL2 -framework SDL2_ttf
 
 HEADERS_LIST = \
 	wolf3d.h
@@ -49,7 +45,7 @@ SRC_LIST = \
 	init.c \
 	read_map.c \
 	render.c \
-	raycaster.c \
+	wall_casting.c \
 	floor_casting.c \
 	draw.c \
 	controls.c

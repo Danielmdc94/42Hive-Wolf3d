@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 16:26:47 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:30:10 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ void	render_frame(t_core *core)
 	end = SDL_GetPerformanceCounter();
 	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
 	core->fps = 1.0f / elapsed;
-//	SDL_Delay(floor(1000.0f / 60.0f - elapsed * 1000.0f));
-//-------
-	printf("%f\n", core->fps);
-//	printf("%f\n", core->player.m_speed);
-//	printf("%f\n", core->ray.perp_wall_dis);
-//-------
 }
 
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
@@ -74,7 +68,7 @@ void	display_ui(t_core *core)
 
 	fps_text = ft_itoa(core->fps);
 	fps_surface = TTF_RenderText_Solid(core->sdl.text.font,
-		fps_text, core->sdl.text.color);
+			fps_text, core->sdl.text.color);
 	SDL_BlitSurface(fps_surface, NULL, core->sdl.screen,
 		&core->sdl.screen->clip_rect);
 	free(fps_text);

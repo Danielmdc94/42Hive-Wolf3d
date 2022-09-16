@@ -6,11 +6,14 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 16:28:42 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:26:54 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
+
+static SDL_Surface	*choose_texture(t_core *core);
+static SDL_Surface	*mandatory_texture(t_core *core);
 
 void	draw_wall_textured(t_core *core, int x)
 {
@@ -41,7 +44,7 @@ void	draw_wall_textured(t_core *core, int x)
 	}
 }
 
-SDL_Surface	*choose_texture(t_core *core)
+static SDL_Surface	*choose_texture(t_core *core)
 {
 	if (core->is_textured == 1)
 	{
@@ -61,16 +64,19 @@ SDL_Surface	*choose_texture(t_core *core)
 			return (core->textures.wood);
 	}
 	else
-	{
-		if (core->ray.face == 0 && core->ray.dir.x > 0)
-			return (core->textures.colorstone);
-		else if (core->ray.face == 0 && core->ray.dir.x < 0)
-			return (core->textures.bluestone);
-		else if (core->ray.face == 1 && core->ray.dir.y > 0)
-			return (core->textures.redbrick);
-		else
-			return (core->textures.wood);
-	}
+		return (mandatory_texture(core));
+}
+
+static SDL_Surface	*mandatory_texture(t_core *core)
+{
+	if (core->ray.face == 0 && core->ray.dir.x > 0)
+		return (core->textures.colorstone);
+	else if (core->ray.face == 0 && core->ray.dir.x < 0)
+		return (core->textures.bluestone);
+	else if (core->ray.face == 1 && core->ray.dir.y > 0)
+		return (core->textures.redbrick);
+	else
+		return (core->textures.wood);
 }
 
 void	draw_wall_flat(t_core *core, int x)

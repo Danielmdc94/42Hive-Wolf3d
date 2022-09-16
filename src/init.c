@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 17:51:19 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:18:11 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_sdl(t_core *core)
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)
 		error_print(core, "Error: Failed to initialize SDL2");
 	SDL_LoadWAV("./sounds/05_-_Wolfenstein_3D_-_DOS_-_P.O.W..wav",
-			&wav_spec, &core->sdl.wav_buffer, &wav_length);
+		&wav_spec, &core->sdl.wav_buffer, &wav_length);
 	core->sdl.device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
 	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
 	SDL_PauseAudioDevice(core->sdl.device_id, 0);
