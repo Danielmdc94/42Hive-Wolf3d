@@ -6,18 +6,22 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 17:49:24 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:43:00 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
+/* Prints an error message before quiting the program safely
+ */
 void	error_print(t_core *core, char *error_msg)
 {
 	ft_putendl_fd(error_msg, 2);
 	exit_wolf3d(core);
 }
 
+/* Removes all allocated space and closes all SDL tools
+ */
 void	exit_wolf3d(t_core *core)
 {
 	int	i;

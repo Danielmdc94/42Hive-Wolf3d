@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:36:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 15:42:52 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:58:04 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 static void	draw_row(t_core *core, t_floor *floor, int y);
 
+/* Calculates leftmost and rightmost rays, then going row by row, gets the
+ * distance from the 'camera' to the floor of the current pixel row.
+ * it maps said pixel row to the chosen texture with draw_row()
+ * Draws one full texture copy per cell on the floor
+ */
 void	floor_casting(t_core *core)
 {
 	int		y;
-	int		curr_pos;
+	int		y_relative;
 	double	row_dis;
 	t_floor	floor;
 
@@ -28,8 +33,8 @@ void	floor_casting(t_core *core)
 	y = WIN_H / 2;
 	while (y < WIN_H)
 	{
-		curr_pos = y - WIN_H / 2;
-		row_dis = (0.5 * WIN_H) / curr_pos;
+		y_relative = y - WIN_H / 2;
+		row_dis = (0.5 * WIN_H) / y_relative;
 		floor.step.x = row_dis * (floor.ray_dir1.x - floor.ray_dir0.x) / WIN_W;
 		floor.step.y = row_dis * (floor.ray_dir1.y - floor.ray_dir0.y) / WIN_W;
 		floor.curr.x = core->player.pos.x + row_dis * floor.ray_dir0.x;

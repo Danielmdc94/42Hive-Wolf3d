@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:59:22 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 18:19:27 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:04:40 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	wall_casting(t_core *core)
 		core->ray.map_pos.x = (int)core->player.pos.x;
 		core->ray.map_pos.y = (int)core->player.pos.y;
 		if (core->ray.dir.x == 0)
-			core->ray.delta_dis.x = pow(1, 30);
+			core->ray.delta_dis.x = INF;
 		else
 			core->ray.delta_dis.x = fabs(1 / core->ray.dir.x);
 		if (core->ray.dir.y == 0)
-			core->ray.delta_dis.y = pow(1, 30);
+			core->ray.delta_dis.y = INF;
 		else
 			core->ray.delta_dis.y = fabs(1 / core->ray.dir.y);
 		calculate_step(core);

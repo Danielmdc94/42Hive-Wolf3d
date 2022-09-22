@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 18:32:58 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:07:09 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@
 # define WIN_W 960
 # define WIN_H 640
 
-# define PLAYER_VOL 0.3
-
 /*--------FONT--------*/
-# define FONT_SIZE 24
 # define FPS_SIZE 20
+
+/*-------VALUES-------*/
+# define PLAYER_VOL 0.3
+# define INF 1000000000
+
 ////////STRUCTS
 
 /*-----2D VECTORS-----*/
@@ -152,7 +154,7 @@ typedef struct s_core
 	t_map		map;
 	int			is_runing;
 	int			is_textured;
-	double		fps;
+	int			fps;
 	t_player	player;
 	t_frames	frames;
 	t_ray		ray;

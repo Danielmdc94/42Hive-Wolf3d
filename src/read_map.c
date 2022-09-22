@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:29:05 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/06/27 18:56:13 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:24:35 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	allocate_map(t_core *core);
 static void	fill_map_matrix(t_core *core, int fd);
 static void	fill_matrix_line(t_core *core, char **line_array, int y);
 
+/* Reads and copies the  given map into the core structure
+ */
 void	read_map(t_core *core)
 {
 	char	*line;
@@ -33,6 +35,8 @@ void	read_map(t_core *core)
 		free(line);
 	}
 	close(fd);
+	if (core->map.height == 0)
+		error_print(core, "Error: Invalid file");
 	allocate_map(core);
 	fd = open(core->map.file, O_RDONLY);
 	if (fd < 0)

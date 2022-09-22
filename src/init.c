@@ -6,12 +6,15 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 19:49:05 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:01:16 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
+/* Calls all the functions that fill necessary data to
+ * start the rendering
+ */
 void	init(t_core *core)
 {
 	read_map(core);
@@ -52,8 +55,8 @@ void	init_sdl(t_core *core)
 
 void	init_player(t_core *core)
 {
-	core->player.pos.x = 2.5;
-	core->player.pos.y = 4.5;
+	core->player.pos.x = 4.5;
+	core->player.pos.y = 2.5;
 	core->player.dir.x = 1;
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;

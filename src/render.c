@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 19:44:40 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:42:06 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	render_frame(t_core *core)
 	SDL_UpdateWindowSurface(core->sdl.win);
 	end = SDL_GetPerformanceCounter();
 	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
-	core->fps = 1.0f / elapsed;
+	core->fps = (int)(1.0f / elapsed);
 }
 
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
