@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 19:04:18 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:09:13 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ static void	move(t_core *core)
 				[(int)(core->player.pos.x)] == 0)
 			core->player.pos.y -= core->player.dir.y * core->player.m_speed;
 	}
+	if (core->player.pos.y < 1 || core->player.pos.y >= core->map.height - 1
+		|| core->player.pos.x < 1 || core->player.pos.x >= core->map.width - 1)
+		error_print(core, "Error: Out of bounds");
 }
 
 static void	rotate(t_core *core)

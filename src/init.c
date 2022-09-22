@@ -6,14 +6,16 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 18:26:57 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:21:23 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
+static void	load_music(t_core *core);
+
 /* Calls all the functions that fill necessary data to
- * start the rendering
+ * start the game loop
  */
 void	init(t_core *core)
 {
@@ -28,22 +30,15 @@ void	init(t_core *core)
 
 void	init_sdl(t_core *core)
 {
-	SDL_AudioSpec	wav_spec;
-	Uint32			wav_length;
-
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)
 		error_print(core, "Error: Failed to initialize SDL2");
-	SDL_LoadWAV("./sounds/05_-_Wolfenstein_3D_-_DOS_-_P.O.W..wav",
-		&wav_spec, &core->sdl.wav_buffer, &wav_length);
-	core->sdl.device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
-	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
-	SDL_PauseAudioDevice(core->sdl.device_id, 0);
 	if (TTF_Init() != 0)
 		error_print(core, "Error: Failed to initialize SDL2_ttf");
 	core->sdl.text.font = TTF_OpenFont("./fonts/ConnectionBold-ER1g.ttf",
 			FPS_SIZE);
 	if (core->sdl.text.font == NULL)
 		error_print(core, "Error: Failed to load text font");
+	load_music(core);
 	core->sdl.text.color.r = 255;
 	core->sdl.text.color.g = 255;
 	core->sdl.text.color.b = 255;
@@ -54,6 +49,24 @@ void	init_sdl(t_core *core)
 	core->sdl.screen = SDL_GetWindowSurface(core->sdl.win);
 }
 
+static void	load_music(t_core *core)
+{
+	SDL_AudioSpec	wav_spec;
+	Uint32			wav_length;
+
+	SDL_LoadWAV("./sounds/01-P.O.W..wav",
+		&wav_spec, &core->sdl.wav_buffer, &wav_length);
+	core->sdl.device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+	SDL_LoadWAV("./sounds/02-Twelfth_Hour.wav",
+		&wav_spec, &core->sdl.wav_buffer, &wav_length);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+	SDL_LoadWAV("./sounds/03-The_Ultimate_Challenge.wav",
+		&wav_spec, &core->sdl.wav_buffer, &wav_length);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+	SDL_PauseAudioDevice(core->sdl.device_id, 0);
+}
+
 void	init_player(t_core *core)
 {
 	core->player.pos.x = 4.5;
@@ -62,8 +75,6 @@ void	init_player(t_core *core)
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;
 	core->player.plane.y = 0.66;
-	core->player.m_speed = 0.4;
-	core->player.r_speed = 0.2;
 }
 
 void	init_textures(t_core *core)
