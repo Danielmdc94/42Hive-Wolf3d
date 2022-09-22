@@ -6,13 +6,13 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/09/16 18:46:22 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/09/22 15:22:27 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -flto -pthread
+FLAGS = -Wall -Wextra -Werror -flto -Ofast
 
 MY_PATH = $(shell pwd)
 
