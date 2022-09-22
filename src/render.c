@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 15:33:30 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:03:12 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 void	render_frame(t_core *core)
 {
-	Uint64	start;
-	Uint64	end;
-	float	elapsed;
+	Uint32	start;
+	Uint32	end;
+	Uint32	delta;
 
 	clear_window(core->sdl.screen);
-	start = SDL_GetPerformanceCounter();
+	start = SDL_GetTicks();
 	if (core->is_textured == 1)
 		floor_casting(core);
 	wall_casting(core);
 	display_ui(core);
 	SDL_UpdateWindowSurface(core->sdl.win);
-	end = SDL_GetPerformanceCounter();
-	elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
-	core->fps = (int)(1.0f / elapsed);
+	end = SDL_GetTicks();
+	delta = (end - start);
+	if (delta < TIME_PER_FRAME)
+	{
+		SDL_Delay(TIME_PER_FRAME - delta);
+		delta = TIME_PER_FRAME;
+	}
+	if (delta >= TIME_PER_FRAME)
+		core->fps = (int)(1000 / delta);
+	core->player.m_speed = delta * 0.016;
+	core->player.r_speed = delta * 0.008;
 }
 
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)

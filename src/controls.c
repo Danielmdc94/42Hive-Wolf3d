@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 15:53:14 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:04:18 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static void	move(t_core *core)
 	{
 		if (core->map.matrix[(int)(core->player.pos.y)]
 				[(int)(core->player.pos.x + core->player.dir.x
-				* core->player.m_speed + PLAYER_VOL)] == 0)
+				* core->player.m_speed)] == 0)
 			core->player.pos.x += core->player.dir.x * core->player.m_speed;
 		if (core->map.matrix[(int)(core->player.pos.y
-				+ core->player.dir.y * core->player.m_speed - PLAYER_VOL)]
+				+ core->player.dir.y * core->player.m_speed)]
 				[(int)(core->player.pos.x)] == 0)
 			core->player.pos.y += core->player.dir.y * core->player.m_speed;
 	}
@@ -59,10 +59,10 @@ static void	move(t_core *core)
 	{
 		if (core->map.matrix[(int)(core->player.pos.y)]
 				[(int)(core->player.pos.x - core->player.dir.x
-				* core->player.m_speed + PLAYER_VOL)] == 0)
+				* core->player.m_speed)] == 0)
 			core->player.pos.x -= core->player.dir.x * core->player.m_speed;
 		if (core->map.matrix[(int)(core->player.pos.y
-				- core->player.dir.y * core->player.m_speed - PLAYER_VOL)]
+				- core->player.dir.y * core->player.m_speed)]
 				[(int)(core->player.pos.x)] == 0)
 			core->player.pos.y -= core->player.dir.y * core->player.m_speed;
 	}
