@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:52:59 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 18:10:55 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:31:39 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	exit_wolf3d(t_core *core)
 	if (core->sdl.win)
 		SDL_DestroyWindow(core->sdl.win);
 	SDL_CloseAudioDevice(core->sdl.device_id);
-	SDL_FreeWAV(core->sdl.wav_buffer);
 	TTF_Quit();
 	SDL_Quit();
 	exit(0);

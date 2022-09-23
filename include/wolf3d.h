@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 18:46:50 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:29:36 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ typedef struct s_sdl
 	SDL_Event			event;
 	t_text				text;
 	SDL_AudioDeviceID	device_id;
-	Uint8				*wav_buffer;
+	Uint8				*wav_buffer1;
+	Uint8				*wav_buffer2;
+	Uint8				*wav_buffer3;
 }						t_sdl;
 
 /*------TEXTURES------*/

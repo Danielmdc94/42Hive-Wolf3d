@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 21:38:39 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:00:02 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init(t_core *core)
 	init_player(core);
 	core->is_runing = 1;
 	core->is_textured = 2;
-	core->fps = 60;
+	core->fps = 62;
 }
 
 void	init_sdl(t_core *core)
@@ -55,16 +55,19 @@ static void	load_music(t_core *core)
 	Uint32			wav_length;
 
 	SDL_LoadWAV("./sounds/01-P.O.W..wav",
-		&wav_spec, &core->sdl.wav_buffer, &wav_length);
+		&wav_spec, &core->sdl.wav_buffer1, &wav_length);
 	core->sdl.device_id = SDL_OpenAudioDevice(NULL, 0, &wav_spec, NULL, 0);
-	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer1, wav_length);
 	SDL_LoadWAV("./sounds/02-Twelfth_Hour.wav",
-		&wav_spec, &core->sdl.wav_buffer, &wav_length);
-	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+		&wav_spec, &core->sdl.wav_buffer2, &wav_length);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer2, wav_length);
 	SDL_LoadWAV("./sounds/03-The_Ultimate_Challenge.wav",
-		&wav_spec, &core->sdl.wav_buffer, &wav_length);
-	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer, wav_length);
+		&wav_spec, &core->sdl.wav_buffer3, &wav_length);
+	SDL_QueueAudio(core->sdl.device_id, core->sdl.wav_buffer3, wav_length);
 	SDL_PauseAudioDevice(core->sdl.device_id, 0);
+	SDL_FreeWAV(core->sdl.wav_buffer1);
+	SDL_FreeWAV(core->sdl.wav_buffer2);
+	SDL_FreeWAV(core->sdl.wav_buffer3);
 }
 
 void	init_player(t_core *core)
