@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/24 12:57:19 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:57:46 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init(t_core *core)
 	init_textures(core);
 	init_player(core);
 	core->is_runing = 1;
+	core->menu = 1;
 	core->is_textured = 2;
 	core->fps = 62;
 }

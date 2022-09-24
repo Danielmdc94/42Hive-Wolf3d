@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/24 12:56:55 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:06:35 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ typedef struct s_core
 	t_map		map;
 	int			is_runing;
 	int			is_textured;
+	int			menu;
 	int			fps;
 	t_player	player;
 	t_frames	frames;
@@ -178,15 +179,17 @@ void		init(t_core *core);
 void		init_sdl(t_core *core);
 void		init_player(t_core *core);
 void		init_textures(t_core *core);
+
 /*------READ MAP------*/
 void		read_map(t_core *core);
 
 /*-------RENDER-------*/
 void		render_frame(t_core *core);
+
+/*-------MY SDL-------*/
 void		set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 Uint32		get_pixel(SDL_Surface *surface, int x, int y);
 void		clear_window(SDL_Surface *surface);
-void		display_ui(t_core *core);
 
 /*------RAYCASTER-----*/
 void		wall_casting(t_core *core);

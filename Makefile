@@ -6,7 +6,7 @@
 #    By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 13:57:28 by dpalacio          #+#    #+#              #
-#    Updated: 2022/09/22 21:21:22 by dpalacio         ###   ########.fr        #
+#    Updated: 2022/09/24 14:24:10 by dpalacio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_LIST = \
 	wall_casting.c \
 	floor_casting.c \
 	draw.c \
-	controls.c
+	controls.c \
+	my_sdl.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

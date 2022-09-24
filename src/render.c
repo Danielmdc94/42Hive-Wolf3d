@@ -6,11 +6,16 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/24 13:03:54 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:06:20 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
+
+static void	render(t_core *core);
+static void	display_ui(t_core *core);
+static void	display_menu(t_core *core);
+static void	text_line(t_core *core, SDL_Rect *clip, char *text);
 
 void	render_frame(t_core *core)
 {
@@ -20,11 +25,7 @@ void	render_frame(t_core *core)
 
 	clear_window(core->sdl.screen);
 	start = SDL_GetTicks();
-	if (core->is_textured == 1)
-		floor_casting(core);
-	wall_casting(core);
-	display_ui(core);
-	SDL_UpdateWindowSurface(core->sdl.win);
+	render(core);
 	end = SDL_GetTicks();
 	delta = (end - start);
 	if (delta < TIME_PER_FRAME)
@@ -40,38 +41,19 @@ void	render_frame(t_core *core)
 		core->player.m_speed *= 2;
 }
 
-void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+static void	render(t_core *core)
 {
-	Uint32	*target_pixel;
-
-	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
+	if (core->menu == 0)
 	{
-		target_pixel = (Uint32 *)((Uint8 *)surface->pixels
-				+ y * surface->pitch
-				+ x * surface->format->BytesPerPixel);
-	*target_pixel = pixel;
+		if (core->is_textured == 1)
+			floor_casting(core);
+		wall_casting(core);
 	}
+	display_ui(core);
+	SDL_UpdateWindowSurface(core->sdl.win);
 }
 
-Uint32	get_pixel(SDL_Surface *surface, int x, int y)
-{
-	Uint32	*target_pixel;
-
-	target_pixel = (Uint32 *)((Uint8 *)surface->pixels
-			+ y * surface->pitch
-			+ x * surface->format->BytesPerPixel);
-	return (*target_pixel);
-}
-
-void	clear_window(SDL_Surface *surface)
-{
-	size_t	len;
-
-	len = surface->w * surface->h * surface->format->BytesPerPixel;
-	ft_memset(surface->pixels, 0, len);
-}
-
-void	display_ui(t_core *core)
+static void	display_ui(t_core *core)
 {
 	SDL_Surface	*fps_surface;
 	char		*fps_num;
@@ -86,4 +68,43 @@ void	display_ui(t_core *core)
 		&core->sdl.screen->clip_rect);
 	free(fps_text);
 	SDL_FreeSurface(fps_surface);
+	if (core->menu == 1)
+		display_menu(core);
+}
+
+static void	display_menu(t_core *core)
+{
+	SDL_Rect	clip;
+
+	clip.x = (WIN_W / 2) - 30;
+	clip.y = (WIN_H / 2) - 180;
+	clip.w = WIN_W;
+	clip.h = WIN_H;
+	text_line(core, &clip, "MENU");
+	clip.x -= 50;
+	clip.y += 30;
+	text_line(core, &clip, "Toggle Menu: M");
+	text_line(core, &clip, "Cycle Textures: T");
+	clip.y += 30;
+	text_line(core, &clip, "Move: W,A,S,D");
+	text_line(core, &clip, "Run: Left Shift");
+	clip.y += 30;
+	text_line(core, &clip, "Exit: Esc");
+	clip.x = 0;
+	clip.y = 0;
+	clip.w = WIN_W;
+	clip.h = WIN_H;
+	SDL_SetClipRect(core->sdl.screen, &clip);
+}
+
+static void	text_line(t_core *core, SDL_Rect *clip, char *text)
+{
+	SDL_Surface	*menu_surface;
+
+	menu_surface = TTF_RenderText_Solid(core->sdl.text.font,
+			text, core->sdl.text.color);
+	SDL_SetClipRect(core->sdl.screen, clip);
+	SDL_BlitSurface(menu_surface, NULL, core->sdl.screen,
+		&core->sdl.screen->clip_rect);
+	clip->y += 40;
 }
