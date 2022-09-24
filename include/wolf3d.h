@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/23 11:29:36 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:56:55 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_player
 	t_vector2	plane;
 	double		m_speed;
 	double		r_speed;
+	int			is_running;
 }				t_player;
 
 /*--------MAP---------*/

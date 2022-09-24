@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 19:03:12 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:03:54 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	render_frame(t_core *core)
 	}
 	if (delta >= TIME_PER_FRAME)
 		core->fps = (int)(1000 / delta);
-	core->player.m_speed = delta * 0.016;
-	core->player.r_speed = delta * 0.008;
+	core->player.m_speed = delta * 0.012;
+	core->player.r_speed = delta * 0.012;
+	if (core->player.is_running == 1)
+		core->player.m_speed *= 2;
 }
 
 void	set_pixel(SDL_Surface *surface, int x, int y, Uint32 pixel)

@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 18:56:40 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 21:09:13 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:00:57 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	on_keydown(t_core *core);
 static void	move(t_core *core);
 static void	rotate(t_core *core);
+static void	run(t_core *core);
 
 void	controls(t_core *core)
 {
@@ -22,6 +23,8 @@ void	controls(t_core *core)
 		core->is_runing = 0;
 	if (core->sdl.event.type == SDL_KEYDOWN)
 		on_keydown(core);
+	if (core->sdl.event.key.keysym.sym == SDLK_LSHIFT)
+		run(core);
 }
 
 static void	on_keydown(t_core *core)
@@ -97,4 +100,12 @@ static void	rotate(t_core *core)
 		core->player.plane.y = core->temp.plane * sin(core->player.r_speed)
 			+ core->player.plane.y * cos(core->player.r_speed);
 	}
+}
+
+static void	run(t_core *core)
+{
+	if (core->sdl.event.key.type == SDL_KEYDOWN)
+		core->player.is_running = 1;
+	else if (core->sdl.event.key.type == SDL_KEYUP)
+		core->player.is_running = 0;
 }

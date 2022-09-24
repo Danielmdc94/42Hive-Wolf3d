@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/23 13:00:02 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:57:19 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	init_player(t_core *core)
 	core->player.dir.y = 0;
 	core->player.plane.x = 0;
 	core->player.plane.y = 0.66;
+	core->player.is_running = 0;
 }
 
 void	init_textures(t_core *core)
