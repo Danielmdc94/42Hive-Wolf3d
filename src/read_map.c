@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:29:05 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/22 20:41:57 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:17:32 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	read_map(t_core *core)
 		error_print(core, "Error: Failed to open map file");
 	fill_map_matrix(core, fd);
 	close(fd);
+	if (core->map.width < 5 || core->map.height < 5)
+		error_print(core, "Error: Map is too small");
 }
 
 static void	get_width(t_core *core, char *line)

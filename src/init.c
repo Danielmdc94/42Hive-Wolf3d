@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/24 14:57:46 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:19:21 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	load_music(t_core *core)
 
 void	init_player(t_core *core)
 {
-	core->player.pos.x = 4.5;
+	core->player.pos.x = 3.5;
 	core->player.pos.y = 2.5;
 	core->player.dir.x = 1;
 	core->player.dir.y = 0;
