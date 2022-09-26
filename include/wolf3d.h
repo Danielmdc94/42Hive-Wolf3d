@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:46:24 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/26 13:27:48 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:51:13 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define WOLF3D_H
 
 # include "../libft/include/libft.h"
-# include "../SDL/SDL2.framework/Versions/A/Headers/SDL.h"
-# include "../SDL/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h"
+# include "../sdl/SDL2.framework/Versions/A/Headers/SDL.h"
+# include "../sdl/SDL2_ttf.framework/Versions/A/Headers/SDL_ttf.h"
 # include "get_next_line.h"
 # include <math.h>
 # include <fcntl.h>
