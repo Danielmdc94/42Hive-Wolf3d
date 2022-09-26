@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 16:37:45 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/24 15:06:20 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:18:51 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	display_ui(t_core *core)
 	char		*fps_text;
 
 	fps_num = ft_itoa(core->fps);
-	fps_text = ft_strjoin(fps_num, " fps. ");
+	fps_text = ft_strjoin(fps_num, " fps");
 	free(fps_num);
 	fps_surface = TTF_RenderText_Solid(core->sdl.text.font,
 			fps_text, core->sdl.text.color);
@@ -106,5 +106,6 @@ static void	text_line(t_core *core, SDL_Rect *clip, char *text)
 	SDL_SetClipRect(core->sdl.screen, clip);
 	SDL_BlitSurface(menu_surface, NULL, core->sdl.screen,
 		&core->sdl.screen->clip_rect);
+	SDL_FreeSurface(menu_surface);
 	clip->y += 40;
 }

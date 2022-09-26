@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:44:10 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/26 12:19:21 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:27:30 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	load_music(t_core *core);
 
 /* Calls all the functions that fill necessary data to
- * start the game loop
+ * start the game loop, loads music and textures
  */
 void	init(t_core *core)
 {
@@ -98,5 +98,11 @@ void	init_textures(t_core *core)
 		error_print(core, "Error: Failed to load texture");
 	core->textures.redbrick = SDL_LoadBMP("textures/redbrick.bmp");
 	if (!core->textures.redbrick)
+		error_print(core, "Error: Failed to load texture");
+	core->textures.eagle = SDL_LoadBMP("textures/eagle.bmp");
+	if (!core->textures.eagle)
+		error_print(core, "Error: Failed to load texture");
+	core->textures.mossy = SDL_LoadBMP("textures/mossy.bmp");
+	if (!core->textures.mossy)
 		error_print(core, "Error: Failed to load texture");
 }

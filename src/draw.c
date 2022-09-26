@@ -6,7 +6,7 @@
 /*   By: dpalacio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:17:39 by dpalacio          #+#    #+#             */
-/*   Updated: 2022/09/16 18:26:54 by dpalacio         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:31:05 by dpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,14 @@ static SDL_Surface	*choose_texture(t_core *core)
 		else if (core->map.matrix[(int)core->ray.map_pos.y]
 			[(int)core->ray.map_pos.x] == 4)
 			return (core->textures.redbrick);
-		else
+		else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 5)
+			return (core->textures.eagle);
+		else if (core->map.matrix[(int)core->ray.map_pos.y]
+			[(int)core->ray.map_pos.x] == 6)
 			return (core->textures.wood);
+		else
+			return (core->textures.mossy);
 	}
 	else
 		return (mandatory_texture(core));
